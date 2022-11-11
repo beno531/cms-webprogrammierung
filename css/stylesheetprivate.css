@@ -1,0 +1,68 @@
+body{
+    background-color: #72e7ff;
+    margin: 0;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+    border: 1px solid rgb(255, 255, 255);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color:#143054;
+      }
+  
+  li:first-child{
+    float: left;
+  }
+
+  li {
+    float: right
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /*brauchen wir wohl nicht */
+  li a:hover:not(.active) {
+    background-color: #111;
+  }
+
+
+div a{
+    color:white;
+    /*Abstände von den Links klappen irgendwie nicht*/
+    margin: 2em;
+  
+  
+}
+
+
+.sidenav{
+    border-left:1px solid rgb(255, 255, 255); ;
+    border-right: 1px solid rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(255, 255, 255);;
+    color: white;
+    background-color:#748BA7;
+    width: 14em;
+    /*height ggf nicht optimal gelöst. Habe erstmal keine bessere Lösung gefunden*/
+    min-height: 50em;
+   
+
+}
+
+div{
+    /*div muss noch richtig platziert werden */
+    background-color: red;
+    position: static;
+    height: 10em;
+    width: 10em;
+}
+
