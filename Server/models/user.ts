@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import * as mongoose from "mongoose";
 
 const dataSchema = new mongoose.Schema({
     name: {
@@ -11,9 +11,14 @@ const dataSchema = new mongoose.Schema({
     },
     benutzername: {
         required: true,
-        type: String
+        type: String,
+        unique : true,
     },
     email: {
+        required: true,
+        type: String
+    },
+    passwort: {
         required: true,
         type: String
     },
@@ -25,4 +30,4 @@ const dataSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('User', dataSchema)
+module.exports = mongoose.model('UserDTO', dataSchema)
