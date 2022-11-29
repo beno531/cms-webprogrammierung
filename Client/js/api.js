@@ -3,16 +3,9 @@ const apiUrl = "http://localhost:3000/api/";
 
 function getAllUser() {
 
-    let data;
-
     fetch(apiUrl + 'user')
         .then((response) => response.json())
         .then((data) => {
-
-
-            console.log(data);
-
-
 
             var table = document.getElementById('nutzerverwaltung');
 
@@ -47,4 +40,21 @@ function getAllUser() {
 
 
 
+}
+
+async function createUser() {
+
+    return await fetch(apiUrl + 'user/create', {
+        method: 'POST',
+        body: new FormData(formElem)
+    });
+
+    
+}
+
+function test() {
+
+    console.log("Moin! Servus!");
+
+    
 }

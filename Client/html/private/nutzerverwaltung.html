@@ -13,7 +13,6 @@
 </head>
 <body>
 
-    <script>getAllUser()</script>
     <header>
 
         <ul class="dashboardnav">
@@ -41,40 +40,12 @@
 
             <div class="content-header">
                 <h1>Nutzerverwaltung</h1>
-                <button class="add-button" id="myBtn">Nutzer erstellen</button>
+                <button class="trigger">Nutzer erstellen</button>
             </div>
 
 
 
 
-                <!-- The Modal -->
-                <div id="myModal" class="modal">
-
-                <!-- Modal content -->
-                <div class="modal-content">
-
-                    <form name="formElem">
-                        <label for="name">Name:</label><br>
-                        <input type="text" id="name" name="name"><br>
-                        <label for="vorname">Vorname:</label><br>
-                        <input type="text" id="vorname" name="vorname"><br>
-                        <label for="benutzername">Benutzername:</label><br>
-                        <input type="text" id="benutzername" name="benutzername"><br>
-                        <label for="email">Email:</label><br>
-                        <input type="email" id="email" name="email"><br>
-                        <label for="rolle">Rolle:</label><br>
-                        <input type="text" id="rolle" name="rolle"><br>
-                        <label for="passwort">Passwort:</label><br>
-                        <input type="password" id="passwort" name="passwort"><br>
-
-
-                        <input type="submit" value="Submit">
-                      </form>
-
-                      
-                </div>
-
-                </div>
 
 
 
@@ -92,60 +63,10 @@
                         <th width="10%">Rolle</th>
                         <th width="10%">Optionen</th>
                     </tr>
-
-
-
-
-                    <!--
-                    <tr>
-                        <td>Der Text selbst ist kein richtiges Latein, schon das erste Wort „Lorem“ existiert dort nicht. Dennoch erkennt man im Text eine Reihe lateinischer Wörter, die aus dem sehr ähnlichen Absatz 1.10.32 bis 1.10.33 aus Ciceros De finibus bonorum et malorum[1] stammen:[2]
-
-                            “Neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit […].”
-                            „Ferner gibt es auch niemanden, der den Schmerz um seiner selbst willen liebt, der ihn sucht und haben will, einfach, weil es Schmerz ist […].“
-                            Über die Herkunft des Textes lässt sich keine Klarheit mehr gewinnen. Auch finden sich viele leicht voneinander abweichende Varianten dieses Textes. In der 1914 herausgegebenen lateinisch-englischen Cicero-Werkausgabe findet sich der Text auf Seite 36 oben beginnend mit lorem ipsum…, da das Wort dolorem getrennt umbrochen wurde.[3]
-                            
-                            Versionen des Lorem-ipsum-Textes werden mindestens seit den 1960er Jahren im Satz verwendet, als er durch Anzeigen für Letraset-Transferfolien für Anreibebuchstaben populär gemacht wurde.[4] Lorem ipsum wurde Mitte der 1980er Jahre in der digitalen Welt eingeführt, als Aldus es in Grafik- und Textverarbeitungsvorlagen für sein Desktop-Publishing-Programm PageMaker einsetzte.[2] Andere beliebte Textverarbeitungsprogramme, einschließlich Pages und Microsoft Word, haben seitdem Lorem ipsum übernommen.[5][6] Außerdem ist Lorem ipsum in vielen LaTeX-Paketen[7][8][9] und in Web-Content-Managern wie Joomla! und WordPress sowie CSS-Bibliotheken wie Semantic UI enthalten. Derartige Blindtexte werden häufig von Webseitenentwicklern genutzt, um Kunden Prototypen ihrer in Auftrag gestellten Seiten zeigen zu können.
-                            
-                            Wurden zunächst die wenigen Zeilen von „Lorem ipsum“ im Blindtext fortlaufend wiederholt, so dient heute der Cicero-Text als Basis vieler Lorem-ipsum-Generatoren, die darauf aufbauend längere Abschnitte erzeugen. Die Wortfolge ist so weithin üblich, dass viele Desktop-Publishing-Programme einen Menüpunkt für Blindtext haben, der eine Sequenz erzeugt, die mit „Lorem ipsum“ beginnt. Außerdem wird heute die Wortfolge „Lorem ipsum“ in der elektronischen Druckaufbereitung erkannt und eine Warnmeldung ausgegeben, damit eine Publikation mit verbliebenem Blindtext nicht versehentlich in den Druck geht.</td>
-                        <td>Der Text selbst ist kein richtiges Latein, schon das erste Wort „Lorem“ existiert dort nicht. Dennoch erkennt man im Text eine Reihe lateinischer Wörter, die aus dem sehr ähnlichen Absatz 1.10.32 bis 1.10.33 aus Ciceros De finibus bonorum et malorum[1] stammen:[2]
-
-                            “Neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit […].”
-                            „Ferner gibt es auch niemanden, der den Schmerz um seiner selbst willen liebt, der ihn sucht und haben will, einfach, weil es Schmerz ist […].“
-                            Über die Herkunft des Textes lässt sich keine Klarheit mehr gewinnen. Auch finden sich viele leicht voneinander abweichende Varianten dieses Textes. In der 1914 herausgegebenen lateinisch-englischen Cicero-Werkausgabe findet sich der Text auf Seite 36 oben beginnend mit lorem ipsum…, da das Wort dolorem getrennt umbrochen wurde.[3]
-                            
-                            Versionen des Lorem-ipsum</td>
-                            <td>Der Text selbst ist kein richtiges Latein, schon das erste Wort „Lorem“ existiert dort nicht. Dennoch erkennt man im Text eine Reihe lateinischer Wörter, die aus dem sehr ähnlichen Absatz 1.10.32 bis 1.10.33 aus Ciceros De finibus bonorum et malorum[1] stammen:[2]
-
-                                “Neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit […].”
-                                „Ferner gibt es auch niemanden, der den Schmerz um seiner selbst willen liebt, der ihn sucht und haben will, einfach, weil es Schmerz ist […].“
-                                Über die Herkunft des Textes lässt sich keine Klarheit mehr gewinnen. Auch finden sich viele leicht voneinander abweichende Varianten dieses Textes. In der 1914 herausgegebenen lateinisch-englischen Cicero-Werkausgabe findet sich der Text auf Seite 36 oben beginnend mit lorem ipsum…, da das Wort dolorem getrennt umbrochen wurde.[3]
-                                
-                                Versionen des Lorem-ipsum</td><td>Der Text selbst ist kein richtiges Latein, schon das erste Wort „Lorem“ existiert dort nicht. Dennoch erkennt man im Text eine Reihe lateinischer Wörter, die aus dem sehr ähnlichen Absatz 1.10.32 bis 1.10.33 aus Ciceros De finibus bonorum et malorum[1] stammen:[2]
-
-                                “Neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit […].”
-                                „Ferner gibt es auch niemanden, der den Schmerz um seiner selbst willen liebt, der ihn sucht und haben will, einfach, weil es Schmerz ist […].“
-                                Über die Herkunft des Textes lässt sich keine Klarheit mehr gewinnen. Auch finden sich viele leicht voneinander abweichende Varianten dieses Textes. In der 1914 herausgegebenen lateinisch-englischen Cicero-Werkausgabe findet sich der Text auf Seite 36 oben beginnend mit lorem ipsum…, da das Wort dolorem getrennt umbrochen wurde.[3]
-                                
-                                Versionen des Lorem-ipsum</td>
-                        <td>Der Text selbst ist kein richtiges Latein, schon das erste Wort „Lorem“ existiert dort nicht. Dennoch erkennt man im Text eine Reihe lateinischer Wörter, die aus dem sehr ähnlichen Absatz 1.10.32 bis 1.10.33 aus Ciceros De finibus bonorum et malorum[1] stammen:[2]
-
-                            “Neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit […].”
-                            „Ferner gibt es auch niemanden, der den Schmerz um seiner selbst willen liebt, der ihn sucht und haben will, einfach, weil es Schmerz ist […].“
-                            Über die Herkunft des Textes lässt sich keine Klarheit mehr gewinnen. Auch finden sich viele leicht voneinander abweichende Varianten dieses Textes. In der 1914 herausgegebenen lateinisch-englischen Cicero-Werkausgabe findet sich der Text auf Seite 36 oben beginnend mit lorem ipsum…, da das Wort dolorem getrennt umbrochen wurde.[3]
-                            
-                            Versionen des Lorem-ipsum</td>
-                        <td class="options">
-                            <a href="#">
-                                <span><i class="fa-sharp fa-solid fa-pen"></i></span>
-                            </a>
-                            <a href="#">
-                                <span><i class="fa-solid fa-trash-can fa-lg"></i></span>
-                            </a>
-                        </td>
-                    </tr>-->
                 </table>
 
             </div>
+            
 
             
         </main>
@@ -153,51 +74,38 @@
 
     </section>
 
-    <script>
-        formElem.onsubmit = async (e) => {
-    e.preventDefault();
+    <!-- Create User Modal -->
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h1>Neuen User anlegen:</h1>
+            <form name="formElem">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="vorname">Vorname:</label><br>
+                <input type="text" id="vorname" name="vorname"><br>
+                <label for="benutzername">Benutzername:</label><br>
+                <input type="text" id="benutzername" name="benutzername"><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"><br>
+                <label for="rolle">Rolle:</label><br>
+                <select name="rolle" id="rolle">
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </select><br>
+                <label for="passwort">Passwort:</label><br>
+                <input type="password" id="passwort" name="passwort"><br>
 
-    let response = await fetch('http://localhost:3000/api/user/create', {
-      method: 'POST',
-      body: new FormData(formElem)
-    });
-
-
-    let result = await response.json();
-
-    alert(result);
-  };
-  </script>
-    <script>
-
-        // Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
 
 
-    </script>
+
+    <script type="text/javascript" src="../../js/nutzerverwaltung.js" defer></script>
+    <script type="text/javascript" src="../../js/modal.js" defer></script>
+
 
 </body>
 </html>
