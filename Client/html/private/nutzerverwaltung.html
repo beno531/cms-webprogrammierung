@@ -8,9 +8,12 @@
     <title>Nutzerverwaltung</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script type="text/javascript" src="../../js/api.js"></script>
 </head>
 <body>
 
+    <script>getAllUser()</script>
     <header>
 
         <ul class="dashboardnav">
@@ -38,12 +41,49 @@
 
             <div class="content-header">
                 <h1>Nutzerverwaltung</h1>
-                <button class="add-button">Nutzer erstellen</button>
+                <button class="add-button" id="myBtn">Nutzer erstellen</button>
             </div>
+
+
+
+
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+
+                    <form name="formElem">
+                        <label for="name">Name:</label><br>
+                        <input type="text" id="name" name="name"><br>
+                        <label for="vorname">Vorname:</label><br>
+                        <input type="text" id="vorname" name="vorname"><br>
+                        <label for="benutzername">Benutzername:</label><br>
+                        <input type="text" id="benutzername" name="benutzername"><br>
+                        <label for="email">Email:</label><br>
+                        <input type="email" id="email" name="email"><br>
+                        <label for="rolle">Rolle:</label><br>
+                        <input type="text" id="rolle" name="rolle"><br>
+                        <label for="passwort">Passwort:</label><br>
+                        <input type="password" id="passwort" name="passwort"><br>
+
+
+                        <input type="submit" value="Submit">
+                      </form>
+
+                      
+                </div>
+
+                </div>
+
+
+
+
+
             
             <div class="content-main">
 
-                <table width="100%">
+                <table id="nutzerverwaltung" width="100%">
                     <tr>
                         <th width="20%">Name</th>
                         <th width="20%">Vorname</th>
@@ -52,6 +92,11 @@
                         <th width="10%">Rolle</th>
                         <th width="10%">Optionen</th>
                     </tr>
+
+
+
+
+                    <!--
                     <tr>
                         <td>Der Text selbst ist kein richtiges Latein, schon das erste Wort „Lorem“ existiert dort nicht. Dennoch erkennt man im Text eine Reihe lateinischer Wörter, die aus dem sehr ähnlichen Absatz 1.10.32 bis 1.10.33 aus Ciceros De finibus bonorum et malorum[1] stammen:[2]
 
@@ -97,7 +142,7 @@
                                 <span><i class="fa-solid fa-trash-can fa-lg"></i></span>
                             </a>
                         </td>
-                    </tr>
+                    </tr>-->
                 </table>
 
             </div>
@@ -108,6 +153,51 @@
 
     </section>
 
+    <script>
+        formElem.onsubmit = async (e) => {
+    e.preventDefault();
+
+    let response = await fetch('http://localhost:3000/api/user/create', {
+      method: 'POST',
+      body: new FormData(formElem)
+    });
+
+
+    let result = await response.json();
+
+    alert(result);
+  };
+  </script>
+    <script>
+
+        // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+    </script>
 
 </body>
 </html>
