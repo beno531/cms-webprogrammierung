@@ -25,16 +25,14 @@ router.post('/user/create', async (req: any, res: any) => {
     })
 
     try {
-
         data.passwort = await SecurityMaster.hashPassword(data.passwort);
 
-
-
         const dataToSave = await data.save();
-        res.status(200).json(dataToSave)
+        
+        res.status(200).json("Der User " + dataToSave.benutzername + " wurde erfolgreich angelegt!")
     }
     catch (error: any) {
-        res.status(400).json({ message: error.message })
+        res.status(400).json(error.message);
     }
 })
 
@@ -43,7 +41,6 @@ router.delete('/user/delete/:username', async (req: any, res: any) => {
     try {
         const username = req.params.username;
         const data = await User.findOneAndDelete({ benutzername: username }).exec();
-        //const data = await User.findByIdAndDelete(id)
         res.send(`User "${data.benutzername}" wurde gelöscht.`)
     }
     catch (error: any) {
@@ -54,7 +51,7 @@ router.delete('/user/delete/:username', async (req: any, res: any) => {
 // Get all User
 router.get('/user', async (req: any, res: any) => {
     try {
-        const data = await User.find();
+        const data = await User.find().select('name vorname benutzername email rolle');
         res.json(data)
     }
     catch (error: any) {
