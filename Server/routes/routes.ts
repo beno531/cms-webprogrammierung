@@ -41,7 +41,7 @@ router.delete('/user/delete/:username', async (req: any, res: any) => {
     try {
         const username = req.params.username;
         const data = await User.findOneAndDelete({ benutzername: username }).exec();
-        res.send(`User "${data.benutzername}" wurde gelöscht.`)
+        res.send(`User "${data.benutzername}" wurde gelöscht.`);
     }
     catch (error: any) {
         res.status(400).json({ message: error.message })
@@ -76,10 +76,10 @@ router.patch('/user/update/:username', async (req: any, res: any) => {
             username, updatedData, options
         )
 
-        res.send(result)
+        res.send(`Die Änderungen wurden erfolgreich gespeichert!`);
     }
     catch (error: any) {
-        res.status(400).json({ message: error.message })
+        res.status(400).json(error.message);
     }
 });
 

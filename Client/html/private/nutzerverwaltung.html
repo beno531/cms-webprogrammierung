@@ -40,7 +40,7 @@
 
             <div class="content-header">
                 <h1>Nutzerverwaltung</h1>
-                <button class="trigger">Nutzer erstellen</button>
+                <button class="trigger" id="modal-user-create-trigger">Nutzer erstellen</button>
             </div>
 
 
@@ -75,11 +75,11 @@
     </section>
 
     <!-- Create User Modal -->
-    <div class="modal">
+    <div class="modal" id="modal-user-create">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
+            <span class="close-button" id="modal-user-create-close-button">&times;</span>
             <h1>Neuen User anlegen:</h1>
-            <form name="formElem">
+            <form name="createUserForm">
                 <label for="name">Name:</label><br>
                 <input type="text" id="name" name="name"><br>
                 <label for="vorname">Vorname:</label><br>
@@ -101,10 +101,33 @@
         </div>
     </div>
 
+    <!-- Edit User Modal -->
+    <div class="modal" id="modal-user-edit">
+        <div class="modal-content">
+            <span class="close-button" id="modal-user-edit-close-button">&times;</span>
+            <h1>User editieren:</h1>
+            <form name="editUserForm">
+                <input type="hidden" id="benutzername" name="benutzername">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"><br>
+                <label for="rolle">Rolle:</label><br>
+                <select name="rolle" id="rolle">
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </select><br>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
 
 
     <script type="text/javascript" src="../../js/nutzerverwaltung.js" defer></script>
-    <script type="text/javascript" src="../../js/modal.js" defer></script>
+    <script type="text/javascript" src="../../js/create-user-modal.js" defer></script>
+    <script type="text/javascript" src="../../js/edit-user-modal.js" defer></script>
 
 
 </body>

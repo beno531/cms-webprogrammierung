@@ -1,4 +1,4 @@
-//#region Subscribe to CreateUser-Form
+//#region Get all Users from API
 
 window.onload = function(){ 
   getAllUser();
@@ -6,26 +6,46 @@ window.onload = function(){
 
 //#endregion
 
-//#region Subscribe to CreateUser-Form
+//#region Subscribe to Create-User-Form
 
-formElem.onsubmit = async (e) => {
+createUserForm.onsubmit = async (e) => {
   e.preventDefault();
 
-  var response = await createUser(formElem);
+  var response = await createUser(createUserForm);
 
   let result = await response.json();
 
+  if(response.status == 200){
+    createUserForm.reset();
+    toggleModal();
+    alert(result);
+  }else{
+    alert(result);
+  }
+};
 
+//#endregion
 
-  // TODO: Wenn Fehler dann ...
+//#region Subscribe to CreateUser-Form
 
-  formElem.reset();
+editUserForm.onsubmit = async (e) => {
+  e.preventDefault();
 
-  toggleModal();
+  const username = document.querySelector('#modal-user-edit #benutzername').value;
 
-  //getAllUser();
+  var response = await updateUser(username, editUserForm);
 
-  alert(result);
+  let result = await response.json();
+
+  console.log(result);
+
+  if(response.status == 200){
+    toggleEditUserModal();
+    getAllUser();
+    alert(result);
+  }else{
+    alert(result);
+  }
 };
 
 //#endregion
