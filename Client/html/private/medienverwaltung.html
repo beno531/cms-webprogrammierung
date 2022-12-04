@@ -42,7 +42,7 @@
 
             <div class="content-header">
                 <h1>Medienverwaltung</h1>
-                <button class="trigger" id="modal-upload-media-trigger">Nutzer erstellen</button>
+                <button class="trigger" id="modal-upload-media-trigger">Upload</button>
             </div>
 
 
@@ -78,11 +78,11 @@
 
 
     </section>
-    <!-- Edit User Modal -->
+    <!-- Upload Media Modal -->
     <div class="modal" id="modal-upload-media">
         <div class="modal-content">
             <span class="close-button" id="modal-upload-media-close-button">&times;</span>
-            <h1>User editieren:</h1>
+            <h1>Medienupload:</h1>
             <form ref='uploadMediaForm' 
             name='uploadForm' 
             action='http://localhost:3000/api/media/upload' 
@@ -93,8 +93,18 @@
             </form>
         </div>
     </div>
+
+     <!-- View Media Modal -->
+     <div class="modal" id="view-media-modal">
+        <div class="modal-content">
+            <span class="close-button" id="view-media-modal-close-button">&times;</span>
+            <h1>View Media:</h1>
+                <iframe id="mediapreview" src="" title="Media Preview"></iframe>          
+        </div>
+    </div>
     <script src="../../js/upload-media-modal.js"></script>
     <script src="../../js/medienverwaltung.js"></script>
+    <script src="../../js/view-media-modal.js"></script>
     <script src="../../js/api.js"></script>
 </body>
 
