@@ -111,11 +111,16 @@ function getAllMedia() {
 
             for (const media of data) {
 
+                
+                var erstelltAmDate = new Date(media.erstelltAm);
+                erstelltAmDate = erstelltAmDate.toLocaleDateString('de-DE');
+
+
                 const tableRow = document.createElement("tr");
                 tableRow.innerHTML = ` 
                 <td>${media.bezeichnung} </td>
                 <td>${media.link}</td>
-                <td>${media.erstelltAm}</td>`;
+                <td>${erstelltAmDate}</td>`;
                 
 
                 //View Button
@@ -125,9 +130,6 @@ function getAllMedia() {
                     toggleViewMediaModal();
                     loadViewMediaModal(media.link);
                 };
-
-
-                console.log(media._id);
 
                 //Delete Button
                 const deleteButton = document.createElement("button");
