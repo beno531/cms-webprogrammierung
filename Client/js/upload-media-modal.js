@@ -6,8 +6,6 @@ const triggerUploadMedia = document.querySelector("#modal-upload-media-trigger")
 function toggleUploadMediaModal() {
   
     modalUploadMedia.classList.toggle("show-modal");
-
-    //document.querySelector('#modal-upload-media #name').value = "";
 }
 
 closeButtonUploadMedia.addEventListener("click", toggleUploadMediaModal);

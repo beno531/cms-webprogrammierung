@@ -17,7 +17,8 @@ createUserForm.onsubmit = async (e) => {
 
   if(response.status == 200){
     createUserForm.reset();
-    toggleModal();
+    toggleUserCreateModal();
+    getAllUser();
     alert(result);
   }else{
     alert(result);

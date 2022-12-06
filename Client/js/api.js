@@ -4,11 +4,12 @@ const apiUrl = "http://localhost:3000/api/";
 
 function getAllUser() {
 
-    fetch(apiUrl + 'user')
+    fetch(apiUrl + 'user', {cache: "no-store"})
         .then((response) => response.json())
         .then((data) => {
 
             var table = document.getElementById('nutzerverwaltung');
+            table.innerHTML = "";
 
 
             for (const user of data) {
@@ -43,8 +44,6 @@ function getAllUser() {
                         let result = await response.json();
 
                         getAllUser();
-
-                        console.log(result);
 
                         alert(result);
                     }
@@ -102,11 +101,12 @@ async function deleteUser(username) {
 
 function getAllMedia() {
 
-    fetch(apiUrl + 'media')
+    fetch(apiUrl + 'media', {cache: "no-store"})
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
             var table = document.getElementById('medienverwaltung');
+            table.innerHTML = "";
 
 
             for (const media of data) {
@@ -142,11 +142,13 @@ function getAllMedia() {
                         const response = await deleteMedia(media._id);
                         let result = await response.json();
 
-                        getAllMedia();
 
-                        console.log(result);
-
-                        alert(result);
+                        // TODO funktioniert noch nicht
+                        if(response.status == 200){
+                            alert(result);
+                          }else{
+                            alert(result);
+                          }
                     }
 
                 };
@@ -167,6 +169,15 @@ function getAllMedia() {
 
         });
 
+}
+
+async function createMedia(formData) {
+
+    return await fetch(apiUrl + 'media/upload', {
+        method: 'POST',
+        body: new FormData(formData)
+    });
+    
 }
 
 async function deleteMedia(id) {

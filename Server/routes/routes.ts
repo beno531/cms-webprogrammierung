@@ -10,6 +10,7 @@ const testFolder = './media/';
 
 const User = require('../models/user');
 const MediaDTO = require('../models/media');
+const UPLOADPATH = __dirname + '/../media/';
 
 module.exports = router;
 
@@ -41,7 +42,7 @@ router.delete('/user/delete/:username', async (req: any, res: any) => {
     try {
         const username = req.params.username;
         const data = await User.findOneAndDelete({ benutzername: username }).exec();
-        res.send(`User "${data.benutzername}" wurde gelöscht.`);
+        res.status(200).json(`User "${data.benutzername}" wurde gelöscht.`);
     }
     catch (error: any) {
         res.status(400).json({ message: error.message })
@@ -52,7 +53,8 @@ router.delete('/user/delete/:username', async (req: any, res: any) => {
 router.get('/user', async (req: any, res: any) => {
     try {
         const data = await User.find().select('name vorname benutzername email rolle');
-        res.json(data)
+        
+        res.json(data);
     }
     catch (error: any) {
         res.status(500).json({ message: error.message })
@@ -76,7 +78,7 @@ router.patch('/user/update/:username', async (req: any, res: any) => {
             username, updatedData, options
         )
 
-        res.send(`Die Änderungen wurden erfolgreich gespeichert!`);
+        res.status(200).json(`Die Änderungen wurden erfolgreich gespeichert!`);
     }
     catch (error: any) {
         res.status(400).json(error.message);
@@ -153,7 +155,7 @@ router.post('/media/upload', async function (req: any, res: any) {
     // Remove spaces
     sampleFile.name = sampleFile.name.replace(/\s/g, "");
 
-    uploadPath = __dirname + '/../media/' + sampleFile.name;
+    uploadPath = UPLOADPATH + sampleFile.name;
 
 
     // Check ob Dateiname schon vorhanden ist
@@ -178,12 +180,11 @@ router.post('/media/upload', async function (req: any, res: any) {
 
         try {
             const dataToSave = await data.save();
-            res.status(200).json(dataToSave)
+            res.status(200).json("Der Upload von " + dataToSave.bezeichnung + " war erfolgreich!")
         }
         catch (error: any) {
-            res.status(400).json({ message: error.message })
+            res.status(400).json(error.message);
         }
-        res.send('File uploaded!');
     });
 });
 
@@ -214,14 +215,12 @@ router.delete('/media/delete/:id', (req: any, res: any) => {
     try {
         const id = req.params.id;
         MediaDTO.findByIdAndDelete(id, function (err: any, docs: any) {
-            if (err) {
-                console.log(err)
-            }
-            else {
-                console.log("Deleted : ", docs);
-            }
+
+            let filePath = UPLOADPATH + docs.bezeichnung
+            fs.unlinkSync(filePath);
         });
-        res.send(`Media "${id}" wurde gelöscht.`)
+
+        res.status(200).json("Das Element wurde erfolgreich gelöscht!");
     }
     catch (error: any) {
         res.status(400).json({ message: error.message })

@@ -85,10 +85,7 @@
             <span class="close-button" id="modal-upload-media-close-button">&times;</span>
             <h1>Medienupload:</h1>
             <form ref='uploadMediaForm' 
-            name='uploadForm' 
-            action='http://localhost:3000/api/media/upload' 
-            method='post' 
-            encType="multipart/form-data">
+            name='uploadMediaForm'>
                 <input type="file" name="sampleFile" />
                 <input type='submit' value='Upload!' />
             </form>
@@ -104,7 +101,7 @@
         </div>
     </div>
 
-    
+
     <script src="../../js/upload-media-modal.js"></script>
     <script src="../../js/medienverwaltung.js"></script>
     <script src="../../js/view-media-modal.js"></script>
