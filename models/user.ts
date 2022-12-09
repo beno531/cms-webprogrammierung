@@ -30,5 +30,5 @@ export const dataSchema = new mongoose.Schema({
 
 })
 
-const User = mongoose.model('UserDTO', dataSchema)
+const User = mongoose.model('User', dataSchema)
 export default User;

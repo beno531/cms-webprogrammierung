@@ -1,6 +1,6 @@
 import * as mongoose from "mongoose";
 
-const dataSchema = new mongoose.Schema({
+export const dataSchema = new mongoose.Schema({
     bezeichnung: {
         required: true,
         type: String
@@ -16,4 +16,5 @@ const dataSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('MediaDTO', dataSchema)
+const Media = mongoose.model('Media', dataSchema);
+export default Media;
