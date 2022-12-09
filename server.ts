@@ -11,10 +11,8 @@ const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
 const path = require('path');
 
-
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger/swagger_output.json')
-
 
 mongoose.connect(mongoString);
 const database = mongoose.connection;
@@ -35,9 +33,9 @@ app.use(cors());
 
 app.use(fileUpload());
 
-app.use('/css', express.static(path.resolve(__dirname, "client/css")));
-app.use('/js', express.static(path.resolve(__dirname, "client/js")));
-app.use("/media", express.static("media"));
+app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
+app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
+app.use("/media", express.static(path.resolve(__dirname, "media")));
 
 app.use(bodyParser.json());
 
@@ -46,7 +44,7 @@ app.use(express.json());
 // Swagger Doc
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
-app.use('/', express.static(path.resolve(__dirname, "client/html/public")));
+//app.use('/', express.static(path.resolve(__dirname, "client/html/public")));
 app.use('/cms', privateRoutes);
 app.use('/api', apiRoutes);
 
