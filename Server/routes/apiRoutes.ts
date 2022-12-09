@@ -1,6 +1,8 @@
 import * as express from "express";
 import { LoginUser } from "../models/loginUser";
 import { SecurityMaster } from "../models/securityMaster";
+const UserController = require('../controller/userController');
+const SiteController = require('../controller/siteController');
 const fileUpload = require('express-fileupload');
 var fs = require('fs');
 const router = express.Router();
@@ -11,43 +13,16 @@ const testFolder = './media/';
 const User = require('../models/user');
 const MediaDTO = require('../models/media');
 const UPLOADPATH = __dirname + '/../media/';
+const SiteDTO = require('../models/site');
 
 module.exports = router;
 
+
 //Create User
-router.post('/user/create', async (req: any, res: any) => {
-    const data = new User({
-        name: req.body.name,
-        vorname: req.body.vorname,
-        benutzername: req.body.benutzername,
-        email: req.body.email,
-        passwort: req.body.passwort,
-        rolle: req.body.rolle
-    })
-
-    try {
-        data.passwort = await SecurityMaster.hashPassword(data.passwort);
-
-        const dataToSave = await data.save();
-        
-        res.status(200).json("Der User " + dataToSave.benutzername + " wurde erfolgreich angelegt!")
-    }
-    catch (error: any) {
-        res.status(400).json(error.message);
-    }
-})
+router.post('/user/create', UserController.createUser);
 
 // Delete User
-router.delete('/user/delete/:username', async (req: any, res: any) => {
-    try {
-        const username = req.params.username;
-        const data = await User.findOneAndDelete({ benutzername: username }).exec();
-        res.status(200).json(`User "${data.benutzername}" wurde gelöscht.`);
-    }
-    catch (error: any) {
-        res.status(400).json({ message: error.message })
-    }
-})
+router.delete('/user/delete/:username', UserController.deleteUser);
 
 // Get all User
 router.get('/user', async (req: any, res: any) => {
@@ -223,6 +198,19 @@ router.delete('/media/delete/:id', (req: any, res: any) => {
         res.status(200).json("Das Element wurde erfolgreich gelöscht!");
     }
     catch (error: any) {
-        res.status(400).json({ message: error.message })
+        res.status(400).json({ message: error.message });
     }
 })
+
+
+
+// Create Site
+router.post('/site/create', SiteController.createSite);
+
+/*
+// Seite editieren
+router.post('/site/edit/:id', SiteController.editSite);
+
+// Seite löschen
+router.post('/site/delete/:id', SiteController.deleteSite);
+*/

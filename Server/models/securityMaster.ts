@@ -17,3 +17,5 @@ export class SecurityMaster{
     }
 
 }
+
+export default SecurityMaster;
