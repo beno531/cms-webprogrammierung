@@ -1,0 +1,16 @@
+<header>
+
+    <ul>
+        <!--<li><span><img src="logo.jpg" alt="firmenlogo">Firmenname</span></li>-->
+
+        <% if(unterseiten){ %>
+        <% for(var i = unterseiten.length - 1; i >= 0; i--) { %>
+
+            <li><a href="<%= unterseiten[i].titel %>"><%= unterseiten[i].titel %></a></li>
+
+        <% } %>
+        <% } %>
+
+        <li><a href="/">Hauptseite</a></li>
+    </ul> 
+</header>

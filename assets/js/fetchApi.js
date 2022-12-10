@@ -1,6 +1,8 @@
 const apiUrl = "http://localhost:3000/api/";
 
-
+/*********************************
+************** USER **************
+**********************************/
 
 function getAllUser() {
 
@@ -98,6 +100,10 @@ async function deleteUser(username) {
     
 }
 
+/*********************************
+************** MEDIA *************
+**********************************/
+
 
 function getAllMedia() {
 
@@ -106,7 +112,9 @@ function getAllMedia() {
         .then((data) => {
             console.log(data);
             var table = document.getElementById('medienverwaltung');
-            table.innerHTML = "";
+            table.innerHTML = '';
+
+            
 
 
             for (const media of data) {
@@ -187,3 +195,110 @@ async function deleteMedia(id) {
     });
     
 }
+
+/*********************************
+************** SITE **************
+**********************************/
+
+function getAllSites() {
+
+    fetch(apiUrl + 'site', {cache: "no-store"})
+        .then((response) => response.json())
+        .then((data) => {
+            
+
+            var table = document.getElementById('seitenverwaltung');
+            table.innerHTML = `<tr>
+            <th width='20%'>Titel</th>
+            <th width='15%'>Autor</th>
+            <th width="30%">Beschreibung</th>
+            <th width="10%">Layout</th>
+            <th width="15%">Erstellt am</th>
+            <th width="10%">Optionen</th>
+            </tr>`;
+
+
+            for (const site of data) {
+
+                var erstelltAmDate = new Date(site.erstelltAm);
+                erstelltAmDate = erstelltAmDate.toLocaleDateString('de-DE');
+
+                const tableRow = document.createElement("tr");
+                tableRow.innerHTML = ` 
+                <td>${site.titel} </td>
+                <td>${site.autor}</td>
+                <td>${site.beschreibung}</td>
+                <td>${site.layout}</td>
+                <td>${erstelltAmDate}</td>`;
+
+                //Edit Button
+                const editButton = document.createElement("button");
+                editButton.classList.add("trigger", "modal-site-edit-trigger");
+                editButton.innerHTML = `<span><i class="fa-sharp fa-solid fa-pen"></i></span>`;
+                editButton.onclick = function(){
+                    //toggleEditUserModal();
+                    //loadUserDataModal(user);
+                };
+
+                //Delete Button
+                const deleteButton = document.createElement("button");
+                deleteButton.classList.add("trigger", "modal-site-edit-trigger");
+                deleteButton.innerHTML = `<span><i class="fa-solid fa-trash-can fa-lg"></i></span>`;
+                deleteButton.onclick = async function(){
+                    
+                    const check = window.confirm(`Möchten Sie die Seite "${site.titel}" wirklich löschen?`);
+                    
+                    if(check){
+                        const response = await deleteSite(site._id);
+                        let result = await response.json();
+
+                        getAllSites();
+
+                        alert(result);
+                    }
+
+                };
+
+                //Create Options td
+                const tdOptions = document.createElement("td");
+                tdOptions.classList.add("options");
+                tdOptions.appendChild(editButton);
+                tdOptions.appendChild(deleteButton);
+
+                tableRow.appendChild(tdOptions);
+
+                table.appendChild(tableRow);
+            }
+
+        
+        });
+}
+
+
+async function createSite(formData) {
+    
+    return await fetch(apiUrl + 'site/create', {
+        method: 'POST',
+        body: new FormData(formData)
+    });
+
+}
+
+async function deleteSite(id) {
+
+    return await fetch(apiUrl + 'site/delete/' + id, {
+        method: 'DELETE'
+    });
+    
+}
+
+
+
+
+
+
+
+
+/*********************************
+************** AUTH **************
+**********************************/

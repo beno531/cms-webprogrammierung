@@ -6,6 +6,18 @@ const testFolder = './media/';
 
 // Get all Media
 async function getAllMedia(req, res){
+    try {
+        const data = await Media.find();
+        res.json(data)
+    }
+    catch (error: any) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+// Create Media
+async function createMedia(req, res) {
+
     let sampleFile;
     let uploadPath;
 
@@ -49,19 +61,6 @@ async function getAllMedia(req, res){
             res.status(400).json(error.message);
         }
     });
-}
-
-// Create Media
-async function createMedia(req, res) {
-
-    try {
-        const data = await Media.find();
-        res.json(data)
-    }
-    catch (error: any) {
-        res.status(500).json({ message: error.message })
-    }
-    
 }
 
 // Get Media Link

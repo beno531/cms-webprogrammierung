@@ -51,13 +51,15 @@ router.delete('/media/delete/:id', MediaController.deleteMedia);
 // Create Site
 router.post('/site/create', SiteController.createSite);
 
-/*
+// GetAll Sites
+router.get('/site', SiteController.getAllSites);
+
 // Seite editieren
-router.post('/site/edit/:id', SiteController.editSite);
+//router.post('/site/edit/:id', SiteController.editSite);
+
 
 // Seite löschen
-router.post('/site/delete/:id', SiteController.deleteSite);
-*/
+router.delete('/site/delete/:id', SiteController.deleteSite);
 
 
 /*********************************

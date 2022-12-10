@@ -26,7 +26,12 @@ export const dataSchema = new mongoose.Schema({
     inhalt: {
         required: false,
         type: String,
-    },
+    }
+
+    /* TODO
+        - Firmenlogo (Image)
+        - Header Image (Nur bei Index)
+    */
 
 })
 
