@@ -1,4 +1,5 @@
 import * as express from "express";
+import SecurityMaster from "../models/securityMaster";
 
 const router = express.Router();
 
@@ -15,16 +16,16 @@ module.exports = router;
 **********************************/
 
 // Get all User
-router.get('/user', UserController.getAllUser);
+router.get('/user', SecurityMaster.authenticateToken, UserController.getAllUser);
 
 // Create User
-router.post('/user/create', UserController.createUser);
+router.post('/user/create', SecurityMaster.authenticateToken, UserController.createUser);
 
 // Get all User
-router.get('/user', UserController.getAllUser);
+router.get('/user', SecurityMaster.authenticateToken, UserController.getAllUser);
 
 // Delete User
-router.delete('/user/delete/:username', UserController.deleteUser);
+router.delete('/user/delete/:username', SecurityMaster.authenticateToken, UserController.deleteUser);
 
 
 /*********************************
@@ -32,16 +33,16 @@ router.delete('/user/delete/:username', UserController.deleteUser);
 **********************************/
 
 // Create Media
-router.post('/media/upload', MediaController.getAllMedia);
+router.post('/media/upload', SecurityMaster.authenticateToken, MediaController.createMedia);
 
 // GetAll Media
-router.get('/media', MediaController.createMedia);
+router.get('/media', SecurityMaster.authenticateToken, MediaController.getAllMedia);
 
 // Get Media Link
-router.get('/media/:id/link', MediaController.getMediaLink);
+router.get('/media/:id/link', SecurityMaster.authenticateToken, MediaController.getMediaLink);
 
 // Delete Media
-router.delete('/media/delete/:id', MediaController.deleteMedia);
+router.delete('/media/delete/:id', SecurityMaster.authenticateToken, MediaController.deleteMedia);
 
 
 /*********************************
@@ -49,22 +50,24 @@ router.delete('/media/delete/:id', MediaController.deleteMedia);
 **********************************/
 
 // Create Site
-router.post('/site/create', SiteController.createSite);
+router.post('/site/create', SecurityMaster.authenticateToken, SiteController.createSite);
 
 // GetAll Sites
-router.get('/site', SiteController.getAllSites);
+router.get('/site', SecurityMaster.authenticateToken, SiteController.getAllSites);
 
 // Seite editieren
-//router.post('/site/edit/:id', SiteController.editSite);
-
+router.put('/site/:id/edit', SecurityMaster.authenticateToken, SiteController.editSite);
 
 // Seite löschen
-router.delete('/site/delete/:id', SiteController.deleteSite);
+router.delete('/site/delete/:id', SecurityMaster.authenticateToken, SiteController.deleteSite);
 
 
 /*********************************
 ************** AUTH **************
 **********************************/
 
-// Check Credentials
-router.post('/auth', AuthController.checkCredentials);
+// Login
+router.post('/login', AuthController.login);
+
+// Logout
+router.post('/logout', SecurityMaster.authenticateToken, AuthController.logout);

@@ -5,12 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/stylesheetprivate.css">
+    <link rel="stylesheet" href="/css/stylesheetprivate.css">
     <title>Medienverwaltung</title>
+
+    <link rel="icon" type="image/x-icon" href="/img/logo.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <script src="/js/fetchApi.js"></script>
+        <script type="text/javascript" src="/js/auth/logout.js"></script>
 </head>
 
 <body>
@@ -18,8 +23,8 @@
     <header>
 
         <ul class="dashboardnav">
-            <li><a>Dashboard</a></li>
-            <li><a>Abmelden</a></li>
+            <li><a href="/cms/dashboard">Dashboard</a></li>
+            <li><button onclick="logoutUser()">Abmelden</button></li>
         </ul>
 
     </header>
@@ -29,9 +34,9 @@
         <aside>
 
             <ul class="sidenav-menu">
-                <li><a href="#">Seitenverwaltung</a></li>
-                <li><a href="#">Nutzerverwaltung</a></li>
-                <li><a href="#">Medienverwaltung</a></li>
+                <li><a href="/cms/seitenverwaltung">Seitenverwaltung</a></li>
+                <li><a href="/cms/nutzerverwaltung">Nutzerverwaltung</a></li>
+                <li><a href="/cms/medienverwaltung">Medienverwaltung</a></li>
             </ul>
 
         </aside>
@@ -68,32 +73,12 @@
 
     </section>
 
-    <!-- Upload Media Modal -->
-    <div class="modal" id="modal-upload-media">
-        <div class="modal-content">
-            <span class="close-button" id="modal-upload-media-close-button">&times;</span>
-            <h1>Medienupload:</h1>
-            <form ref='uploadMediaForm' 
-            name='uploadMediaForm'>
-                <input type="file" name="sampleFile" />
-                <input type='submit' value='Upload!' />
-            </form>
-        </div>
-    </div>
+    
 
-     <!-- View Media Modal -->
-     <div class="modal" id="view-media-modal">
-        <div class="modal-content">
-            <span class="close-button" id="view-media-modal-close-button">&times;</span>
-            <h1>View Media:</h1>
-                <iframe id="mediapreview" src="" title="Media Preview"></iframe>          
-        </div>
-    </div>
 
-    <script src="../../js/upload-media-modal.js"></script>
-    <script src="../../js/medienverwaltung.js"></script>
-    <script src="../../js/view-media-modal.js"></script>
-    <script src="../../js/api.js"></script>
+    <script src="/js/medienverwaltung/upload-media-modal.js"></script>
+    <script src="/js/medienverwaltung/medienverwaltung.js"></script>
+    <script src="/js/medienverwaltung/view-media-modal.js"></script>
 </body>
 
 </html>

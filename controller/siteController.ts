@@ -100,6 +100,31 @@ async function createSite(req, res) {
 
 }
 
+// Edit Site
+async function editSite(req, res){
+    try {
+        const siteId = req.params.id;
+
+        console.log(siteId);
+
+        const updatedData = {
+            inhalt: req.body.inhalt,
+        };
+
+        const options = { new: true };
+
+        const result = await Site.findOneAndUpdate(
+            {_id: siteId}, updatedData, options
+        )
+
+        res.status(200).json(`Die Änderungen wurden erfolgreich gespeichert!`);
+    }
+    catch (error: any) {
+        res.status(400).json(error.message);
+    }
+}
+
+
 // Delete Site
 async function deleteSite(req, res){
     try {
@@ -108,6 +133,10 @@ async function deleteSite(req, res){
             if(err){
                 res.status(400).json({ message: err.message })
             }
+
+
+            let filePath = __dirname + "/../views/public/" + data.titel + '.ejs'
+            fs.unlinkSync(filePath);
 
             res.status(200).json(`Seite "${data?.titel}" wurde gelöscht.`);
         });
@@ -123,5 +152,6 @@ async function deleteSite(req, res){
 module.exports = {
     createSite,
     getAllSites,
+    editSite,
     deleteSite
   };

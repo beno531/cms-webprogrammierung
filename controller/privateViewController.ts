@@ -1,3 +1,4 @@
+import Media from "../models/media";
 import Site from "../models/site";
 
 
@@ -39,10 +40,13 @@ function getSeitenverwaltung(req, res){
 // Get Seiteneditor
 async function getSeiteneditor(req, res){
 
-    const data = await Site.findOne({_id: req.params.id}).select('titel autor beschreibung inhalt');
+    const data = await Site.findOne({_id: req.params.id});
+
+    const media = await Media.find();
 
     res.render('../views/private/seiteneditor', {
-        site: data
+        site: data,
+        media: media
     });
 
 }

@@ -15,5 +15,8 @@ module.exports = router;
 // Home
 router.get('', PublicViewController.home);
 
+// Favicon
+router.all('/:action', function(req, res){});
+
 // Dynamic
 router.get('/:titel', PublicViewController.renderDynamic);

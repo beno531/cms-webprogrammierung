@@ -1,4 +1,5 @@
 import * as express from "express";
+import SecurityMaster from "../models/securityMaster";
 
 const path = require('path');
 const router = express.Router();
@@ -16,16 +17,16 @@ module.exports = router;
 router.get('/login', PrivateViewController.getLogin);
 
 // Dashboard
-router.get('/dashboard', PrivateViewController.getDahsboard);
+router.get('/dashboard', SecurityMaster.authenticateToken, PrivateViewController.getDahsboard);
 
 // Medienverwaltung
-router.get('/medienverwaltung', PrivateViewController.getMedienverwaltung);
+router.get('/medienverwaltung', SecurityMaster.authenticateToken, PrivateViewController.getMedienverwaltung);
 
 // Nutzerverwaltung
-router.get('/nutzerverwaltung', PrivateViewController.getNutzerverwaltung);
+router.get('/nutzerverwaltung', SecurityMaster.authenticateToken, PrivateViewController.getNutzerverwaltung);
 
 // Seitenverwaltung
-router.get('/seitenverwaltung', PrivateViewController.getSeitenverwaltung);
+router.get('/seitenverwaltung', SecurityMaster.authenticateToken, PrivateViewController.getSeitenverwaltung);
 
 // Seiteneditor
-router.get('/seiteneditor/:id', PrivateViewController.getSeiteneditor);
+router.get('/seiteneditor/:id', SecurityMaster.authenticateToken, PrivateViewController.getSeiteneditor);

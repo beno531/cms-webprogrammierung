@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 
 // Check Credentials -> return token
-async function checkCredentials(req, res){
+async function login(req, res){
     const loginUser = new LoginUser({
         username: req.body.username,
         password: req.body.password
@@ -28,10 +28,15 @@ async function checkCredentials(req, res){
             const accessToken = jwt.sign({ username: result.benutzername, role: result.rolle }, jwtSecret);
 
 
-
+            /*
             res.json({
                 accessToken
             });
+
+            */
+
+            res.cookie('auth', accessToken);
+            res.json("Das");
         } else {
             res.send('Username or password incorrect');
         }
@@ -44,6 +49,17 @@ async function checkCredentials(req, res){
     
 }
 
+async function logout(req, res){
+    
+    res.clearCookie('auth');
+
+    res.json('You are logged out');
+    
+}
+
+
+
 module.exports = {
-    checkCredentials,
+    login,
+    logout
 };

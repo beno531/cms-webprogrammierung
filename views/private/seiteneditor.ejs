@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../../css/stylesheetprivate.css">
     <title>Seitenverwaltung</title>
 
+    <link rel="icon" type="image/x-icon" href="/img/logo.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script type="text/javascript" src="../../js/fetchApi.js"></script>
@@ -50,8 +52,9 @@
         
         <div class="one">
             
-            <form action="" style="height: 100%;">
-                <textarea style="height: 100%;" id="w3review" name="w3review" placeholder="Hier HTML-Body einfügen"><% if(site){ %><%= site.inhalt %><% } %></textarea>
+            <form id="editSiteForm" name="editSiteForm" style="height: 100%;">
+                <input type="hidden" id="siteId" name="siteId" value="<% if(site){ %><%= site._id %><% } %>">
+                <textarea style="height: 100%;" id="inhalt" name="inhalt" placeholder="Hier HTML-Body einfügen"><% if(site){ %><%= site.inhalt %><% } %></textarea>
                 <input type='submit' value='Submit' />
             </form> 
 
@@ -60,17 +63,52 @@
             <h2>Metadaten:</h2>
             <ul>
                 <% if(site){ %>
-                    <li><%= site.titel %></li>
-                    <li><%= site.autor %></li>
-                    <li><%= site.beschreibung %></li>
-                    <li><%= site.layout %></li>
+                    <li>Titel: <%= site.titel %></li>
+                    <li>Autor: <%= site.autor %></li>
+                    <li>Beschreibung: <%= site.beschreibung %></li>
+                    <li>Layout: <%= site.layout %></li>
+                    <li>Erstellt am: <%= new Date(site.erstelltAm).toLocaleDateString('de-DE')%></li>
                 <% } %>
                 
             </ul>
+
+            <h2>Medienauswahl:</h2>
+            <p>Weitere Medien hochladen</p>
+            <button class="trigger" id="modal-upload-media-trigger">Upload</button>
+            <br>
+
+            <table id="editorMedienverwaltung" width="100%" >
+                <tr>
+                    <th width="50%">Bezeichnung</th>
+                    <th width="50%">Optionen</th>
+                </tr>
+                <% if(media){ %>
+                    <% for(var i = 0; i < media.length; i++) { %>
+                        <tr>
+                            <td><%- media[i].bezeichnung %></td>
+                            <td class="options">
+                                <button onclick="toggleViewMediaModal();loadViewMediaModal('<%- media[i].link %>')">
+                                    <span><i class="fa-solid fa-eye fa-lg"></i></span>
+                                </button>
+                                <button onclick="copyLinkToClipboard('<%- media[i].link %>')">
+                                    <span><i class="fa-solid fa-clipboard fa-lg"></i></span>
+                                </button>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
+
+                
+            </table>
+
+            
         </div>
           
     </section>
 
+    <script src="/js/medienverwaltung/upload-media-modal.js"></script>
+    <script src="/js/medienverwaltung/view-media-modal.js"></script>
+    <script type="text/javascript" src="/js/seiteneditor/seiteneditor.js" defer></script>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 window.onload = function(){ 
     getAllMedia();
-  };
+};
   
 //#endregion
   
@@ -15,6 +15,11 @@ uploadMediaForm.onsubmit = async (e) => {
 
   let result = await response.json();
 
+  console.log(result);
+
+  //appendItemToTable(result);
+  
+
   if(response.status == 200){
     toggleUploadMediaModal();
     alert(result);
@@ -24,5 +29,28 @@ uploadMediaForm.onsubmit = async (e) => {
 };
 
 //#endregion
+
+
+function appendItemToTable(item) {
+
+  console.log(item);
+  
+  const mediaTable = document.querySelector("#medienverwaltung");
+
+  var data = document.createElement("tr");
+  data.innerHTML = `
+  <td>${item.bezeichnung}</td>
+  <td class="options">
+    <a href="#">
+      <span><i class="fa-solid fa-eye fa-lg"></i></span>
+    </a>
+    <a href="#">
+      <span><i class="fa-solid fa-plus fa-lg"></i></span>
+    </a>
+  </td>`
+
+  mediaTable.appendChild(data);
+
+}
  
     

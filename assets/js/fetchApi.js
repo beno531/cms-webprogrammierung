@@ -86,7 +86,7 @@ async function createUser(formData) {
 async function updateUser(username, formData) {
 
     return await fetch(apiUrl + 'user/update/' + username, {
-        method: 'PATCH',
+        method: 'PUT',
         body: new FormData(formData)
     });
 
@@ -107,7 +107,11 @@ async function deleteUser(username) {
 
 function getAllMedia() {
 
-    fetch(apiUrl + 'media', {cache: "no-store"})
+    fetch(apiUrl + 'media', {
+        headers: {
+            authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1tMTEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NzA3ODQyMzV9.iqX-MvxX2ZIBEPQSOP0aceGJyMeUDMtQdW1jP0v7Eyg"
+        }
+    })
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
@@ -202,7 +206,7 @@ async function deleteMedia(id) {
 
 function getAllSites() {
 
-    fetch(apiUrl + 'site', {cache: "no-store"})
+    fetch(apiUrl + 'site')
         .then((response) => response.json())
         .then((data) => {
             
@@ -236,8 +240,7 @@ function getAllSites() {
                 editButton.classList.add("trigger", "modal-site-edit-trigger");
                 editButton.innerHTML = `<span><i class="fa-sharp fa-solid fa-pen"></i></span>`;
                 editButton.onclick = function(){
-                    //toggleEditUserModal();
-                    //loadUserDataModal(user);
+                    location.href = '/cms/seiteneditor/' + site._id;
                 };
 
                 //Delete Button
@@ -284,6 +287,15 @@ async function createSite(formData) {
 
 }
 
+async function editSite(siteId, formData) {
+    
+    return await fetch(apiUrl + 'site/' + siteId + '/edit', {
+        method: 'PUT',
+        body: new FormData(formData)
+    });
+
+}
+
 async function deleteSite(id) {
 
     return await fetch(apiUrl + 'site/delete/' + id, {
@@ -293,12 +305,23 @@ async function deleteSite(id) {
 }
 
 
-
-
-
-
-
-
 /*********************************
 ************** AUTH **************
 **********************************/
+
+async function login(formData) {
+    
+    return await fetch(apiUrl + 'login', {
+        method: 'POST',
+        body: new FormData(formData)
+    });
+
+}
+
+async function logout() {
+    
+    return await fetch(apiUrl + 'logout', {
+        method: 'POST'
+    });
+
+}

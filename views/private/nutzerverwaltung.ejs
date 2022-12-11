@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/stylesheetprivate.css">
+    <link rel="stylesheet" href="/css/stylesheetprivate.css">
     <title>Nutzerverwaltung</title>
+
+    <link rel="icon" type="image/x-icon" href="/img/logo.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script type="text/javascript" src="../../js/api.js"></script>
+    <script type="text/javascript" src="/js/fetchApi.js"></script>
+    <script type="text/javascript" src="/js/auth/logout.js"></script>
 </head>
 <body>
 
     <header>
 
         <ul class="dashboardnav">
-            <li><a>Dashboard</a></li>
-            <li><a>Abmelden</a></li>
+            <li><a href="/cms/dashboard">Dashboard</a></li>
+            <li><button onclick="logoutUser()">Abmelden</button></li>
         </ul>
 
     </header>
@@ -27,9 +30,9 @@
         <aside>
 
             <ul class="sidenav-menu">
-                <li><a href="#">Seitenverwaltung</a></li>
-                <li><a href="#">Nutzerverwaltung</a></li>
-                <li><a href="#">Medienverwaltung</a></li>
+                <li><a href="/cms/seitenverwaltung">Seitenverwaltung</a></li>
+                <li><a href="/cms/nutzerverwaltung">Nutzerverwaltung</a></li>
+                <li><a href="/cms/medienverwaltung">Medienverwaltung</a></li>
             </ul>
 
         </aside>
@@ -125,9 +128,9 @@
 
 
 
-    <script type="text/javascript" src="../../js/nutzerverwaltung.js" defer></script>
-    <script type="text/javascript" src="../../js/create-user-modal.js" defer></script>
-    <script type="text/javascript" src="../../js/edit-user-modal.js" defer></script>
+    <script type="text/javascript" src="/js/nutzerverwaltung/nutzerverwaltung.js" defer></script>
+    <script type="text/javascript" src="/js/nutzerverwaltung/create-user-modal.js" defer></script>
+    <script type="text/javascript" src="/js/nutzerverwaltung/edit-user-modal.js" defer></script>
 
 
 </body>
