@@ -19,8 +19,8 @@
     <header>
 
         <ul class="dashboardnav">
-            <li><a href="/cms/dashboard">Dashboard</a></li>
-            <li><button onclick="logoutUser()">Abmelden</button></li>
+            <li><a href="/cms/dashboard">DASHBOARD</a></li>
+            <li><button class="logout-btn" onclick="logoutUser()">Abmelden</button></li>
         </ul>
 
     </header>
@@ -30,9 +30,9 @@
         <aside>
 
             <ul class="sidenav-menu">
-                <li><a href="/cms/seitenverwaltung">Seitenverwaltung</a></li>
-                <li><a href="/cms/nutzerverwaltung">Nutzerverwaltung</a></li>
-                <li><a href="/cms/medienverwaltung">Medienverwaltung</a></li>
+                <li><a href="/cms/seitenverwaltung"><i class="fa-solid fa-file-lines fa-lg"></i>Seitenverwaltung</a></li>
+                <li><a href="/cms/nutzerverwaltung"><i class="fa-solid fa-user fa-lg"></i>Nutzerverwaltung</a></li>
+                <li><a href="/cms/medienverwaltung"><i class="fa-solid fa-image fa-lg"></i>Medienverwaltung</a></li>
             </ul>
 
         </aside>
@@ -43,16 +43,19 @@
 
             <div class="content-header">
                 <h1>Seitenverwaltung</h1>
-                <button class="trigger" id="modal-site-create-trigger">Seite erstellen</button>
+                <button class="trigger header-button" id="modal-site-create-trigger">Seite erstellen</button>
             </div>
             
             <div class="content-main">
 
-                <table id="seitenverwaltung" width="100%">
-
-                </table>
+                <table id="seitenverwaltung" class="styled-table"></table>
 
             </div>
+
+
+
+
+    
 
             
         </main>

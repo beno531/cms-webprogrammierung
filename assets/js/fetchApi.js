@@ -212,14 +212,17 @@ function getAllSites() {
             
 
             var table = document.getElementById('seitenverwaltung');
-            table.innerHTML = `<tr>
+            table.innerHTML = `<thead><tr>
             <th width='20%'>Titel</th>
-            <th width='15%'>Autor</th>
-            <th width="30%">Beschreibung</th>
+            <th width='20%'>Autor</th>
+            <th width="35%">Beschreibung</th>
             <th width="10%">Layout</th>
-            <th width="15%">Erstellt am</th>
-            <th width="10%">Optionen</th>
-            </tr>`;
+            <th width="10%">Erstellt am</th>
+            <th width="5%">Optionen</th>
+            </tr></thead>`;
+
+            var tbody = document.createElement("tbody");
+            table.appendChild(tbody);
 
 
             for (const site of data) {
@@ -227,7 +230,8 @@ function getAllSites() {
                 var erstelltAmDate = new Date(site.erstelltAm);
                 erstelltAmDate = erstelltAmDate.toLocaleDateString('de-DE');
 
-                const tableRow = document.createElement("tr");
+               
+                var tableRow = document.createElement("tr");
                 tableRow.innerHTML = ` 
                 <td>${site.titel} </td>
                 <td>${site.autor}</td>
@@ -270,7 +274,7 @@ function getAllSites() {
 
                 tableRow.appendChild(tdOptions);
 
-                table.appendChild(tableRow);
+                tbody.appendChild(tableRow);
             }
 
         

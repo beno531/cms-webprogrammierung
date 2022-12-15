@@ -4,29 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/stylesheetprivate.css">
     <title>Login</title>
 
     <link rel="icon" type="image/x-icon" href="/img/logo.png">
 
     <script type="text/javascript" src="/js/fetchApi.js"></script>
 </head>
-<body>
-    
-<div class="loginbox">
+<body class="login-site">
 
-    <form id="loginForm" name="log inForm">
-        <h1>Nutzerlogin</h1>
+    <div class="login-layout">
 
-        <input type="text" name="username" placeholder="Benutzerkennung" value=""><br>
+        <div class="loginbox">
 
-        <input type="password"  name="password" placeholder="Passwort" value=""><br><br>
-
-        <input type="submit" value="Login">
-    </form> 
-
-
-
-</div>
+            <form id="loginForm" name="log inForm">
+                <h1>NUTZERLOGIN</h1>
+        
+                <input type="text" name="username" placeholder="Benutzerkennung" value=""><br>
+        
+                <input type="password"  name="password" placeholder="Passwort" value=""><br><br>
+        
+                <input type="submit" value="Login">
+            </form> 
+        
+        
+        
+        </div>
+    </div>
 
 <script type="text/javascript" src="/js/auth/login.js" defer></script>
 

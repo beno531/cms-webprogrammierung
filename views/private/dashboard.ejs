@@ -10,6 +10,10 @@
 
     <link rel="icon" href="data:,">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <script type="text/javascript" src="/js/auth/logout.js"></script>
 </head>
 
@@ -19,7 +23,7 @@
 
             <ul class="dashboardnav">
                 <li><a href="/cms/dashboard">Dashboard</a></li>
-                <li><button onclick="logoutUser()">Abmelden</button></li>
+                <li><button class="logout-btn" onclick="logoutUser()">Abmelden</button></li>
             </ul>
 
         </header>
@@ -29,9 +33,9 @@
             <aside>
 
                 <ul class="sidenav-menu">
-                    <li><a href="/cms/seitenverwaltung">Seitenverwaltung</a></li>
-                    <li><a href="/cms/nutzerverwaltung">Nutzerverwaltung</a></li>
-                    <li><a href="/cms/medienverwaltung">Medienverwaltung</a></li>
+                    <li><a href="/cms/seitenverwaltung"><i class="fa-solid fa-file-lines fa-lg"></i>Seitenverwaltung</a></li>
+                    <li><a href="/cms/nutzerverwaltung"><i class="fa-solid fa-user fa-lg"></i>Nutzerverwaltung</a></li>
+                    <li><a href="/cms/medienverwaltung"><i class="fa-solid fa-image fa-lg"></i>Medienverwaltung</a></li>
                 </ul>
 
             </aside>
