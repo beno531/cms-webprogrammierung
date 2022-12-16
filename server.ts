@@ -19,13 +19,19 @@ const PORT = process.env.PORT || 8080;
 mongoose.connect(mongoString);
 const database = mongoose.connection;
 
-database.on('error', (error: any) => {
-    console.log(error)
-})
+try {
 
-database.once('connected', () => {
-    console.log('Database Connected');
-})
+    database.on('error', (error: any) => {
+        console.log(error)
+    })
+    
+    database.once('connected', () => {
+        console.log('Database Connected');
+    })
+    
+} catch (error) {
+    
+}
 
 const app = express();
 
