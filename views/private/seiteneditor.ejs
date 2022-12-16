@@ -4,101 +4,132 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/stylesheetprivate.css">
+    <link rel="stylesheet" href="/css/stylesheetprivate.css">
     <title>Seitenverwaltung</title>
 
     <link rel="icon" type="image/x-icon" href="/img/logo.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script type="text/javascript" src="../../js/fetchApi.js"></script>
-
+    <script type="text/javascript" src="/js/fetchApi.js"></script>
     <style>
-		.box {
-        display: flex;
-        flex-flow: row wrap;
-        height: 100%;
-      }
+        .box {
+            display: flex;
+            flex-flow: row wrap;
+            gap: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
 
-      .one {
-        flex: 4 1 35em;
-        height: 100%;
-        background-color: green;
-      }
+            padding: 60px 30px 30px 30px; 
+            height: 100%; 
+        }
 
-      .two {
-        flex: 1 1 25em;
-        background-color: aqua;
-      }
+        .one {
+            flex: 4 1 35em;
+            height: 100%;
+            display: block;
+            height: 100%;
+        }
 
-      textarea {
-  resize: none;
-  width: 100%;
-  height: 100%;
-}
-  
-        </style>
+        .two {
+            flex: 1 1 25em;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            padding: 20px;
+            background-color: rgb(255, 255, 255);
+            height: 100%;
+            overflow-y: scroll;
+        }
+
+        textarea {
+            resize: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        #editSiteForm {
+
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
 </head>
-<body style="height: 100%;">
+<body style="height: 100vh;background-color: rgb(235, 235, 235);overflow: hidden;">
 
-    <header>
+    
+    <header style="padding: 15px 30px;color: black;font-weight: 600;font-size: 1.8em;height: 30px;">
 
         Seite bearbeiten:
 
     </header>
 
-
-    <section class="box" style="margin: 30px; height: 100%; background-color: red;">
+    <section class="box">
         
         <div class="one">
+
             
             <form id="editSiteForm" name="editSiteForm" style="height: 100%;">
                 <input type="hidden" id="siteId" name="siteId" value="<% if(site){ %><%= site._id %><% } %>">
-                <textarea style="height: 100%;" id="inhalt" name="inhalt" placeholder="Hier HTML-Body einfügen"><% if(site){ %><%= site.inhalt %><% } %></textarea>
-                <input type='submit' value='Submit' />
+                <textarea style="height: 100%;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                border: none;
+                " id="inhalt" name="inhalt" placeholder="Hier HTML-Body einfügen"><% if(site){ %><%= site.inhalt %><% } %></textarea>
+                <div style="height: 60px;">
+                    <input type='submit' value='Speichern' />
+                    <button type="button" class="editor-cancel-btn" onclick="cancelEdit()">Abbrechen</button>
+                </div>
             </form> 
 
         </div>
         <div class="two">
             <h2>Metadaten:</h2>
-            <ul>
+            
+            <ul id="metadaten">
                 <% if(site){ %>
-                    <li>Titel: <%= site.titel %></li>
-                    <li>Autor: <%= site.autor %></li>
-                    <li>Beschreibung: <%= site.beschreibung %></li>
-                    <li>Layout: <%= site.layout %></li>
-                    <li>Erstellt am: <%= new Date(site.erstelltAm).toLocaleDateString('de-DE')%></li>
+                    <li><div><span>Titel:</span><span><%= site.titel %></span></div></li>
+                    <li><div><span>Autor:</span><span><%= site.autor %></span></div></li>
+                    <li><div><span>Beschreibung:</span><span><%= site.beschreibung %></span></div></li>
+                    <li><div><span>Layout:</span><span><%= site.layout %></span></div></li>
+                    <li><div><span>Erstellt am:</span><span><%= new Date(site.erstelltAm).toLocaleDateString('de-DE')%></span></div></li>
                 <% } %>
                 
             </ul>
 
             <h2>Medienauswahl:</h2>
+            <div style="display: flex;
+            justify-content: space-between;
+            align-items: center;">
+            
             <p>Weitere Medien hochladen</p>
-            <button class="trigger" id="modal-upload-media-trigger">Upload</button>
-            <br>
+            <button class="trigger header-button" id="modal-upload-media-trigger">Upload</button>
+            </div>
 
-            <table id="editorMedienverwaltung" width="100%" >
-                <tr>
-                    <th width="50%">Bezeichnung</th>
-                    <th width="50%">Optionen</th>
-                </tr>
-                <% if(media){ %>
-                    <% for(var i = 0; i < media.length; i++) { %>
-                        <tr>
-                            <td><%- media[i].bezeichnung %></td>
-                            <td class="options">
-                                <button onclick="toggleViewMediaModal();loadViewMediaModal('<%- media[i].link %>')">
-                                    <span><i class="fa-solid fa-eye fa-lg"></i></span>
-                                </button>
-                                <button onclick="copyLinkToClipboard('<%- media[i].link %>')">
-                                    <span><i class="fa-solid fa-clipboard fa-lg"></i></span>
-                                </button>
-                            </td>
-                        </tr>
+
+            <table class="styled-table">
+                <thead><tr>
+                    <th width='95%'>Bezeichnung</th>
+                    <th width='5%'>Optionen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(media){ %>
+                        <% for(var i = 0; i < media.length; i++) { %>
+                            <tr>
+                                <td><%- media[i].bezeichnung %></td>
+                                <td class="options">
+                                    <button onclick="toggleViewMediaModal();loadViewMediaModal('<%- media[i].link %>')">
+                                        <span><i class="fa-solid fa-eye fa-lg"></i></span>
+                                    </button>
+                                    <button onclick="copyLinkToClipboard('<%- media[i].link %>')">
+                                        <span><i class="fa-solid fa-clipboard fa-lg"></i></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        <% } %>
                     <% } %>
-                <% } %>
-
-                
+                </tbody>
             </table>
 
             

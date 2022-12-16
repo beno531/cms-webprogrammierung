@@ -27,7 +27,6 @@ section {
   display: flex;/* inbrication for side by side same height children */
 }
 header {
-  background: #FFFB7D;
   width: 100%;
   /* no height or flex value needed */
 }
@@ -54,8 +53,8 @@ aside {
   text-decoration: none;
   background-color: white;
   color: black;
-  padding: 14px 20px;
-  margin: 9px 0;
+  padding: 10px 10px;
+  margin-right: 10px;
   border: solid;
   border-width: 1.8px;
   border-radius: 10px;
@@ -64,28 +63,17 @@ aside {
 }
 
 .dashboardnav {
-  list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: #FFFFFF;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.dashboardnav li:first-child {
-  float: left;
-}
-
-.dashboardnav li {
-  height: 100%;
-  float: right
-}
-
-.dashboardnav li:last-child {
-  padding-right: 10px;
-}
-
-.dashboardnav li a {
+.dashboardnav a {
   display: block;
   text-align: center;
   padding: 18px 16px;
@@ -95,9 +83,34 @@ aside {
   font-size: 1.8em;
 }
 
-.dashboardnav li a:active {
+.dashboardnav a:active {
   color: black;
 }
+
+
+/*
+.sidenav-menu{
+  list-style: none;
+  padding: 0;
+  color: white;
+  
+}
+
+.sidenav-menu li {
+  padding: 10px 0;
+}
+
+.sidenav-menu li > div{
+  
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidenav-menu li a + i{
+  width: 50%;
+}
+
+*/
 
 .sidenav-menu {
   list-style-type: none;
@@ -119,7 +132,10 @@ aside {
 
 .sidenav-menu li a i {
   margin-right: 15px;
+  width: 30px;
 }
+
+
 
 
 .body-container{
@@ -131,6 +147,7 @@ aside {
 .content-header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 /*
@@ -235,6 +252,7 @@ button{
   font-family: sans-serif;
   min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  table-layout: fixed;
 }
 
 .styled-table thead tr {
@@ -246,6 +264,12 @@ button{
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
+}
+
+.styled-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .styled-table tbody tr {
@@ -262,16 +286,17 @@ button{
 
 
 .header-button{
-  background-color: #01a545;
+  background-color: #0267ee;
   border: none;
   color: white;
-  padding: 1px 15px;
+  padding: 10px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
 
@@ -324,9 +349,28 @@ input[type=password], select {
   box-sizing: border-box;
 }
 
-input[type=submit] {
+input[type=email], select {
   width: 100%;
-  background-color: #4CAF50;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  background-color: #009879;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.editor-cancel-btn {
+  background-color: #009879;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -336,5 +380,38 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+  background-color: #009879;
+}
+
+
+textarea:focus-visible{
+  border:none;
+  outline: none;
+}
+
+
+
+#metadaten{
+  list-style: none;
+  padding: 0;
+  
+}
+
+#metadaten li {
+  border-top: 1px solid  rgb(211, 211, 211);
+  padding: 7px 0;
+}
+
+#metadaten li > div{
+  
+  display: flex;
+  justify-content: space-between;
+}
+
+#metadaten li:last-child {
+  border-bottom: 1px solid  rgb(211, 211, 211);
+}
+
+#metadaten li span{
+  width: 50%;
 }

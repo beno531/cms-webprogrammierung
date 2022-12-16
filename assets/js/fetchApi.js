@@ -11,7 +11,17 @@ function getAllUser() {
         .then((data) => {
 
             var table = document.getElementById('nutzerverwaltung');
-            table.innerHTML = "";
+            table.innerHTML = `<thead><tr>
+            <th width="20%">Name</th>
+            <th width="20%">Vorname</th>
+            <th width="20%">Benutzername</th>
+            <th width="25%">Email</th>
+            <th width="10%">Rolle</th>
+            <th width="100px">Optionen</th>
+            </tr></thead>`;
+
+            var tbody = document.createElement("tbody");
+            table.appendChild(tbody);
 
 
             for (const user of data) {
@@ -23,6 +33,7 @@ function getAllUser() {
                 <td>${user.benutzername}</td> 
                 <td>${user.email}</td>  
                 <td>${user.rolle}</td>`;
+
 
                 //Edit Button
                 const editButton = document.createElement("button");
@@ -60,7 +71,7 @@ function getAllUser() {
 
                 tableRow.appendChild(tdOptions);
 
-                table.appendChild(tableRow);
+                tbody.appendChild(tableRow);
             }
 
             
@@ -114,11 +125,18 @@ function getAllMedia() {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
-            var table = document.getElementById('medienverwaltung');
-            table.innerHTML = '';
 
-            
+
+            var table = document.getElementById('medienverwaltung');
+            table.innerHTML = `<thead><tr>
+            <th width="50%">Bezeichnung</th>
+            <th width="30%">Link</th>
+            <th width="10%">Erstellt am</th>
+            <th width="100px">Optionen</th>
+            </tr></thead>`;
+
+            var tbody = document.createElement("tbody");
+            table.appendChild(tbody);
 
 
             for (const media of data) {
@@ -173,7 +191,7 @@ function getAllMedia() {
 
                 tableRow.appendChild(tdOptions);
  
-                table.appendChild(tableRow);
+                tbody.appendChild(tableRow);
                
             }
 
@@ -218,7 +236,7 @@ function getAllSites() {
             <th width="35%">Beschreibung</th>
             <th width="10%">Layout</th>
             <th width="10%">Erstellt am</th>
-            <th width="5%">Optionen</th>
+            <th width="100px">Optionen</th>
             </tr></thead>`;
 
             var tbody = document.createElement("tbody");

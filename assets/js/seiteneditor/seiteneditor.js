@@ -49,8 +49,6 @@ uploadMediaForm.onsubmit = async (e) => {
 
 function appendItemToTable(item) {
 
-    console.log(item);
-
     const mediaTable = document.querySelector("#editorMedienverwaltung");
 
     var data = document.createElement("tr");
@@ -76,5 +74,14 @@ function copyLinkToClipboard(link) {
 
     alert("Link wurde kopiert: " + link);
 
+}
+
+function cancelEdit() {
+
+  const check = window.confirm(`Möchten Sie die Seite verlassen ohne zu speichern?`);
+
+  if (check) {
+    location.href = '/cms/seitenverwaltung/';
+  }
 }
 

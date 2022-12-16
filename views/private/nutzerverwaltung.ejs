@@ -19,8 +19,8 @@
     <header>
 
         <ul class="dashboardnav">
-            <li><a href="/cms/dashboard">Dashboard</a></li>
-            <li><button onclick="logoutUser()">Abmelden</button></li>
+            <a href="/cms/dashboard">DASHBOARD</a>
+            <button class="logout-btn" onclick="logoutUser()">Abmelden</button>
         </ul>
 
     </header>
@@ -30,9 +30,9 @@
         <aside>
 
             <ul class="sidenav-menu">
-                <li><a href="/cms/seitenverwaltung">Seitenverwaltung</a></li>
-                <li><a href="/cms/nutzerverwaltung">Nutzerverwaltung</a></li>
-                <li><a href="/cms/medienverwaltung">Medienverwaltung</a></li>
+                <li><a href="/cms/seitenverwaltung"><i class="fa-solid fa-file-lines fa-lg"></i>Seitenverwaltung</a></li>
+                <li><a href="/cms/nutzerverwaltung"><i class="fa-solid fa-user fa-lg"></i>Nutzerverwaltung</a></li>
+                <li><a href="/cms/medienverwaltung"><i class="fa-solid fa-image fa-lg"></i>Medienverwaltung</a></li>
             </ul>
 
         </aside>
@@ -43,30 +43,13 @@
 
             <div class="content-header">
                 <h1>Nutzerverwaltung</h1>
-                <button class="trigger" id="modal-user-create-trigger">Nutzer erstellen</button>
+                <button class="trigger header-button" id="modal-user-create-trigger">Nutzer erstellen</button>
             </div>
-
-
-
-
-
-
-
-
 
             
             <div class="content-main">
 
-                <table id="nutzerverwaltung" width="100%">
-                    <tr>
-                        <th width="20%">Name</th>
-                        <th width="20%">Vorname</th>
-                        <th width="20%">Benutzername</th>
-                        <th width="20%">Email</th>
-                        <th width="10%">Rolle</th>
-                        <th width="10%">Optionen</th>
-                    </tr>
-                </table>
+                <table id="nutzerverwaltung" class="styled-table"></table>
 
             </div>
             
@@ -99,7 +82,7 @@
                 <label for="passwort">Passwort:</label><br>
                 <input type="password" id="passwort" name="passwort"><br>
 
-                <input type="submit" value="Submit">
+                <input type="submit" value="Erstellen">
             </form>
         </div>
     </div>
@@ -121,7 +104,7 @@
                     <option value="user">User</option>
                 </select><br>
 
-                <input type="submit" value="Submit">
+                <input type="submit" value="Speichern">
             </form>
         </div>
     </div>

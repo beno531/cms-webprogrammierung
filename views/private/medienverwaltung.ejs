@@ -23,8 +23,8 @@
     <header>
 
         <ul class="dashboardnav">
-            <li><a href="/cms/dashboard">Dashboard</a></li>
-            <li><button onclick="logoutUser()">Abmelden</button></li>
+            <a href="/cms/dashboard">DASHBOARD</a>
+            <button class="logout-btn" onclick="logoutUser()">Abmelden</button>
         </ul>
 
     </header>
@@ -34,9 +34,9 @@
         <aside>
 
             <ul class="sidenav-menu">
-                <li><a href="/cms/seitenverwaltung">Seitenverwaltung</a></li>
-                <li><a href="/cms/nutzerverwaltung">Nutzerverwaltung</a></li>
-                <li><a href="/cms/medienverwaltung">Medienverwaltung</a></li>
+                <li><a href="/cms/seitenverwaltung"><i class="fa-solid fa-file-lines fa-lg"></i>Seitenverwaltung</a></li>
+                <li><a href="/cms/nutzerverwaltung"><i class="fa-solid fa-user fa-lg"></i>Nutzerverwaltung</a></li>
+                <li><a href="/cms/medienverwaltung"><i class="fa-solid fa-image fa-lg"></i>Medienverwaltung</a></li>
             </ul>
 
         </aside>
@@ -47,23 +47,14 @@
 
             <div class="content-header">
                 <h1>Medienverwaltung</h1>
-                <button class="trigger" id="modal-upload-media-trigger">Upload</button>
+                <button class="trigger header-button" id="modal-upload-media-trigger">Upload</button>
             </div>
 
 
 
             <div class="content-main">
 
-                <table id="medienverwaltung" width="100%" >
-                    <tr>
-                        <th width="50%">Bezeichnung</th>
-                        <th width="30%">Link</th>
-                        <th width="10%">Erstellt am</th>
-                        <th width="10%">Optionen</th>
-                    </tr>
-
-                    
-                </table>
+                <table id="medienverwaltung" class="styled-table"></table>
 
             </div>
 
