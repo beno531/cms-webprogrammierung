@@ -17,6 +17,8 @@ async function home(req, res){
 // Render Dynamic
 async function renderDynamic(req, res){
 
+    console.log("asd");
+
     const data = await Site.findOne({titel: req.params.titel}).select('titel autor beschreibung inhalt');
 
     const list = await Site.find({layout: "Unterseite"}).select('titel');
