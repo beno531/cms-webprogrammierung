@@ -16,22 +16,14 @@ const swaggerFile = require('./swagger/swagger_output.json')
 
 const PORT = process.env.PORT || 8080;
 
-mongoose.connect(mongoString);
-const database = mongoose.connection;
 
-try {
+mongoose.connect(mongoString, function (err) {
+    if (err) {
+        console.log(err);
+    }
 
-    database.on('error', (error: any) => {
-        console.log(error)
-    })
-    
-    database.once('connected', () => {
-        console.log('Database Connected');
-    })
-    
-} catch (error) {
-    
-}
+    console.log('Database Connected');
+});
 
 const app = express();
 
@@ -43,7 +35,9 @@ app.use(fileUpload());
 
 app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
 app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
+//app.use('/sw.js', express.static(path.resolve(__dirname, "assets/js")));
 app.use('/img', express.static(path.resolve(__dirname, "assets/img")));
+app.use('/webfonts', express.static(path.resolve(__dirname, "assets/webfonts")));
 
 app.use("/media", express.static(path.resolve(__dirname, "media")));
 

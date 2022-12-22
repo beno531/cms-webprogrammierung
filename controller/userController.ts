@@ -24,7 +24,9 @@ async function createUser(req, res) {
         email: req.body.email,
         passwort: req.body.passwort,
         rolle: req.body.rolle
-    })
+    });
+
+    console.log(data);
 
     try {
         data.passwort = await SecurityMaster.hashPassword(data.passwort);

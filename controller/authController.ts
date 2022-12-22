@@ -26,9 +26,10 @@ async function login(req, res){
 
             // Generate an access token
             const accessToken = jwt.sign({ username: result.benutzername, role: result.rolle }, jwtSecret);
+            
+            console.log("AccessToken: " + accessToken);
 
-            res.cookie('auth', accessToken);
-            res.json("Das");
+            res.json(accessToken);
         } else {
             res.send('Username or password incorrect');
         }

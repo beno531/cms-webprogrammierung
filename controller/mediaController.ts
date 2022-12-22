@@ -49,7 +49,7 @@ async function createMedia(req, res) {
         // Media in DB enlegen
         const data = new Media({
             bezeichnung: sampleFile.name,
-            link: "http://localhost:3000/media/" + sampleFile.name,
+            link: "/media/" + sampleFile.name,
             erstelltAm: Date.now()
         })
 

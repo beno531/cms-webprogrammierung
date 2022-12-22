@@ -35,5 +35,5 @@ export const dataSchema = new mongoose.Schema({
 
 })
 
-const Site = mongoose.model('SiteDTO', dataSchema)
+const Site = mongoose.model('Site', dataSchema)
 export default Site;

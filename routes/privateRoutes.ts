@@ -13,6 +13,8 @@ module.exports = router;
 ************ PRIVATE *************
 **********************************/
 
+
+
 // Login
 router.get('/login', PrivateViewController.getLogin);
 

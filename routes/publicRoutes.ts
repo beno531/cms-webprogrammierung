@@ -15,9 +15,12 @@ module.exports = router;
 // Home
 router.get('', PublicViewController.home);
 
-// TODO
+/*
 // Favicon
-//router.all('/:action', function(req, res){});
+router.all('/favico.ico', function(req, res){
+    res.status(204);
+    res.end();
+});*/
 
 // Dynamic
 router.get('/:titel', PublicViewController.renderDynamic);
