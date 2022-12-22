@@ -25,7 +25,7 @@ async function login(req, res){
             console.log(jwtSecret);
 
             // Generate an access token
-            const accessToken = jwt.sign({ username: result.benutzername, role: result.rolle }, jwtSecret);
+            const accessToken = jwt.sign({ username: result.benutzername, role: result.rolle, overwrite: true }, jwtSecret);
 
             res.cookie('auth', accessToken);
             res.json("Login war erfolgreich!");

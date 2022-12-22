@@ -18,68 +18,94 @@ async function getAllUser(req, res){
 
 // Create User
 async function createUser(req, res) {
-    const data = new User({
-        name: req.body.name,
-        vorname: req.body.vorname,
-        benutzername: req.body.benutzername,
-        email: req.body.email,
-        passwort: req.body.passwort,
-        rolle: req.body.rolle
-    });
 
-    try {
-        data.passwort = await SecurityMaster.hashPassword(data.passwort);
+    if(req.user.role == "admin"){
 
-        const dataToSave = await data.save();
-        
-        res.status(200).json("Der User " + dataToSave.benutzername + " wurde erfolgreich angelegt!")
-    }
-    catch (error: any) {
-        res.status(400).json(error.message);
+        const data = new User({
+            name: req.body.name,
+            vorname: req.body.vorname,
+            benutzername: req.body.benutzername,
+            email: req.body.email,
+            passwort: req.body.passwort,
+            rolle: req.body.rolle
+        });
+    
+        try {
+            data.passwort = await SecurityMaster.hashPassword(data.passwort);
+    
+            const dataToSave = await data.save();
+            
+            res.status(200).json("Der User " + dataToSave.benutzername + " wurde erfolgreich angelegt!")
+        }
+        catch (error: any) {
+            res.status(400).json(error.message);
+        }
+
+    }else{
+        res.status(403).json("Sie haben keine Berechtigung für diese Aktion!");
     }
 }
 
 // Update User
 async function updateUser(req, res){
-    try {
-        const username = req.params.username;
 
-        const updatedData = {
-            name: req.body.name,
-            email: req.body.email,
-            rolle: req.body.rolle
-        };
+    if(req.user.role == "admin"){
 
-        const options = { new: true };
+        try {
+            const username = req.params.username;
 
-        const result = await User.findOneAndUpdate(
-            username, updatedData, options
-        )
+            const updatedData = {
+                name: req.body.name,
+                email: req.body.email,
+                rolle: req.body.rolle
+            };
+    
+            const options = { new: true };
+    
+            const result = await User.findOneAndUpdate(
+                username, updatedData, options
+            )
 
-        res.status(200).json(`Die Änderungen wurden erfolgreich gespeichert!`);
-    }
-    catch (error: any) {
-        res.status(400).json(error.message);
+            if(username == req.params.username){
+                const accessToken = await SecurityMaster.updateToken(username);
+                res.clearCookie('auth');
+                res.cookie('auth', accessToken);
+            }
+    
+            res.status(200).json(`Die Änderungen wurden erfolgreich gespeichert!`);
+        }
+        catch (error: any) {
+            res.status(400).json(error.message);
+        }
+
+    }else{
+        res.status(403).json("Sie haben keine Berechtigung für diese Aktion!");
     }
 }
 
 // Delete User
 async function deleteUser(req, res){
-    
-    try {
-        const username = req.params.username;
 
-        if(req.user.username != username){
-            const data = await User.findOneAndDelete({ benutzername: username }).exec();
-            res.status(200).json(`User "${data?.benutzername}" wurde gelöscht.`);
+    if(req.user.role == "admin"){
+        try {
+
+            const username = req.params.username;
+    
+            if(req.user.username != username){
+                const data = await User.findOneAndDelete({ benutzername: username }).exec();
+                res.status(200).json(`User "${data?.benutzername}" wurde gelöscht.`);
+            }
+            else{
+                res.status(400).json("Sie können sich nicht selber löschen!");
+            }
+            
         }
-        else{
-            res.status(400).json("Sie können sich nicht selber löschen!");
+        catch (error: any) {
+            res.status(400).json({ message: error.message });
         }
-        
-    }
-    catch (error: any) {
-        res.status(400).json({ message: error.message });
+
+    }else{
+        res.status(403).json("Sie haben keine Berechtigung für diese Aktion!");
     }
 }
 

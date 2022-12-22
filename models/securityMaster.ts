@@ -1,3 +1,5 @@
+import User from "./user";
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -8,13 +10,30 @@ export class SecurityMaster {
     const salt = await bcrypt.genSalt(10);
 
     const hashedPassword = await bcrypt.hash(password, salt);
-    
+
     return hashedPassword;
 
   }
 
   public static async checkPassword(password: string, hash: string) {
     return await bcrypt.compareSync(password, hash);
+  }
+
+  public static async updateToken(username) {
+
+    try {
+      var result = await User.findOne({ benutzername: username }).exec();
+
+      const jwtSecret = process.env.JWT_SECRET;
+
+      // Generate an access token
+      return jwt.sign({ username: result.benutzername, role: result.rolle, overwrite: true }, jwtSecret);
+
+    }
+    catch (error: any) {
+      console.log(error);
+    }
+
   }
 
   public static authenticateToken(req, res, next) {

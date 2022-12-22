@@ -21,8 +21,8 @@ router.get('/user', SecurityMaster.authenticateToken, UserController.getAllUser)
 // Create User
 router.post('/user/create',  SecurityMaster.authenticateToken, UserController.createUser);
 
-// Get all User
-router.get('/user', SecurityMaster.authenticateToken, UserController.getAllUser);
+// Update User
+router.put('/user/update/:username', SecurityMaster.authenticateToken, UserController.updateUser);
 
 // Delete User
 router.delete('/user/delete/:username', SecurityMaster.authenticateToken, UserController.deleteUser);
