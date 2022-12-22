@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
 const path = require('path');
+const favicon = require('serve-favicon');
 
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger/swagger_output.json')
@@ -35,7 +36,6 @@ app.use(fileUpload());
 
 app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
 app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
-//app.use('/sw.js', express.static(path.resolve(__dirname, "assets/js")));
 app.use('/img', express.static(path.resolve(__dirname, "assets/img")));
 app.use('/webfonts', express.static(path.resolve(__dirname, "assets/webfonts")));
 
@@ -49,6 +49,8 @@ app.set('view engine', 'ejs');
 
 // Swagger Doc
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+app.use(favicon(__dirname + '/assets/img/favicon.ico'));
 
 app.use('/', publicRoutes);
 app.use('/cms', privateRoutes);

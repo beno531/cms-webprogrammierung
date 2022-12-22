@@ -26,12 +26,11 @@ async function login(req, res){
 
             // Generate an access token
             const accessToken = jwt.sign({ username: result.benutzername, role: result.rolle }, jwtSecret);
-            
-            console.log("AccessToken: " + accessToken);
 
-            res.json(accessToken);
+            res.cookie('auth', accessToken);
+            res.json("Login war erfolgreich!");
         } else {
-            res.send('Username or password incorrect');
+            res.send('Username oder Passwort falsch!');
         }
 
 

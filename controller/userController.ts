@@ -4,6 +4,7 @@ import SecurityMaster from '../models/securityMaster';
 
 // Get all User
 async function getAllUser(req, res){
+
     try {
         const data = await User.find().select('name vorname benutzername email rolle');
         
@@ -25,8 +26,6 @@ async function createUser(req, res) {
         passwort: req.body.passwort,
         rolle: req.body.rolle
     });
-
-    console.log(data);
 
     try {
         data.passwort = await SecurityMaster.hashPassword(data.passwort);
@@ -66,13 +65,21 @@ async function updateUser(req, res){
 
 // Delete User
 async function deleteUser(req, res){
+    
     try {
         const username = req.params.username;
-        const data = await User.findOneAndDelete({ benutzername: username }).exec();
-        res.status(200).json(`User "${data?.benutzername}" wurde gelöscht.`);
+
+        if(req.user.username != username){
+            const data = await User.findOneAndDelete({ benutzername: username }).exec();
+            res.status(200).json(`User "${data?.benutzername}" wurde gelöscht.`);
+        }
+        else{
+            res.status(400).json("Sie können sich nicht selber löschen!");
+        }
+        
     }
     catch (error: any) {
-        res.status(400).json({ message: error.message })
+        res.status(400).json({ message: error.message });
     }
 }
 

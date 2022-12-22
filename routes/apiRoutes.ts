@@ -19,7 +19,7 @@ module.exports = router;
 router.get('/user', SecurityMaster.authenticateToken, UserController.getAllUser);
 
 // Create User
-router.post('/user/create', SecurityMaster.authenticateToken, UserController.createUser);
+router.post('/user/create',  SecurityMaster.authenticateToken, UserController.createUser);
 
 // Get all User
 router.get('/user', SecurityMaster.authenticateToken, UserController.getAllUser);
