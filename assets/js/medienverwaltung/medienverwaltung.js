@@ -14,14 +14,11 @@ uploadMediaForm.onsubmit = async (e) => {
   var response = await createMedia(uploadMediaForm);
 
   let result = await response.json();
-
-  console.log(result);
-
-  //appendItemToTable(result);
   
 
   if(response.status == 200){
     toggleUploadMediaModal();
+    getAllMedia();
     alert(result);
   }else{
     alert(result);

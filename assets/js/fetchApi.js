@@ -7,7 +7,7 @@ const apiUrl = "http://localhost:3000/api/";
 
 function getAllUser() {
 
-    fetch(apiUrl + 'user', {cache: "no-store"})
+    fetch(apiUrl + 'user', { cache: "no-store" })
         .then((response) => response.json())
         .then((data) => {
 
@@ -40,7 +40,7 @@ function getAllUser() {
                 const editButton = document.createElement("button");
                 editButton.classList.add("trigger", "modal-user-edit-trigger");
                 editButton.innerHTML = `<span><i class="fa-sharp fa-solid fa-pen"></i></span>`;
-                editButton.onclick = function(){
+                editButton.onclick = function () {
                     toggleEditUserModal();
                     loadUserDataModal(user);
                 };
@@ -49,17 +49,20 @@ function getAllUser() {
                 const deleteButton = document.createElement("button");
                 deleteButton.classList.add("trigger", "modal-user-edit-trigger");
                 deleteButton.innerHTML = `<span><i class="fa-solid fa-trash-can fa-lg"></i></span>`;
-                deleteButton.onclick = async function(){
-                    
+                deleteButton.onclick = async function () {
+
                     const check = window.confirm(`Möchten Sie den Benutzer "${user.name}, ${user.vorname}" mit der Kennung "${user.benutzername}" wirklich löschen?`);
-                    
-                    if(check){
+
+                    if (check) {
                         const response = await deleteUser(user.benutzername);
                         let result = await response.json();
 
-                        getAllUser();
-
-                        alert(result);
+                        if (response.status == 200) {
+                            getAllUser();
+                            alert(result);
+                        } else {
+                            alert(result);
+                        }
                     }
 
                 };
@@ -75,7 +78,7 @@ function getAllUser() {
                 tbody.appendChild(tableRow);
             }
 
-            
+
 
         });
 
@@ -92,7 +95,7 @@ async function createUser(formData) {
         body: new FormData(formData)
     });
 
-    
+
 }
 
 async function updateUser(username, formData) {
@@ -109,7 +112,7 @@ async function deleteUser(username) {
     return await fetch(apiUrl + 'user/delete/' + username, {
         method: 'DELETE'
     });
-    
+
 }
 
 /*********************************
@@ -142,7 +145,7 @@ function getAllMedia() {
 
             for (const media of data) {
 
-                
+
                 var erstelltAmDate = new Date(media.erstelltAm);
                 erstelltAmDate = erstelltAmDate.toLocaleDateString('de-DE');
 
@@ -152,12 +155,12 @@ function getAllMedia() {
                 <td>${media.bezeichnung} </td>
                 <td>${media.link}</td>
                 <td>${erstelltAmDate}</td>`;
-                
+
 
                 //View Button
                 const viewButton = document.createElement("button");
                 viewButton.innerHTML = `<span><i class="fa-solid fa-eye fa-lg"></i></span>`;
-                viewButton.onclick = function(){
+                viewButton.onclick = function () {
                     toggleViewMediaModal();
                     loadViewMediaModal(media.link);
                 };
@@ -165,21 +168,20 @@ function getAllMedia() {
                 //Delete Button
                 const deleteButton = document.createElement("button");
                 deleteButton.innerHTML = `<span><i class="fa-solid fa-trash-can fa-lg"></i></span>`;
-                deleteButton.onclick = async function(){
-                    
+                deleteButton.onclick = async function () {
+
                     const check = window.confirm(`Möchten Sie diese Medium "${media.bezeichnung}" wirklich löschen?`);
-                    
-                    if(check){
+
+                    if (check) {
                         const response = await deleteMedia(media._id);
                         let result = await response.json();
 
-
-                        // TODO funktioniert noch nicht
-                        if(response.status == 200){
+                        if (response.status == 200) {
+                            getAllMedia();
                             alert(result);
-                          }else{
+                        } else {
                             alert(result);
-                          }
+                        }
                     }
 
                 };
@@ -191,12 +193,12 @@ function getAllMedia() {
                 tdOptions.appendChild(deleteButton);
 
                 tableRow.appendChild(tdOptions);
- 
+
                 tbody.appendChild(tableRow);
-               
+
             }
 
-            
+
 
         });
 
@@ -208,7 +210,7 @@ async function createMedia(formData) {
         method: 'POST',
         body: new FormData(formData)
     });
-    
+
 }
 
 async function deleteMedia(id) {
@@ -216,7 +218,7 @@ async function deleteMedia(id) {
     return await fetch(apiUrl + 'media/delete/' + id, {
         method: 'DELETE'
     });
-    
+
 }
 
 /*********************************
@@ -228,7 +230,7 @@ function getAllSites() {
     fetch(apiUrl + 'site')
         .then((response) => response.json())
         .then((data) => {
-            
+
 
             var table = document.getElementById('seitenverwaltung');
             table.innerHTML = `<thead><tr>
@@ -249,7 +251,7 @@ function getAllSites() {
                 var erstelltAmDate = new Date(site.erstelltAm);
                 erstelltAmDate = erstelltAmDate.toLocaleDateString('de-DE');
 
-               
+
                 var tableRow = document.createElement("tr");
                 tableRow.innerHTML = ` 
                 <td>${site.titel} </td>
@@ -262,7 +264,7 @@ function getAllSites() {
                 const editButton = document.createElement("button");
                 editButton.classList.add("trigger", "modal-site-edit-trigger");
                 editButton.innerHTML = `<span><i class="fa-sharp fa-solid fa-pen"></i></span>`;
-                editButton.onclick = function(){
+                editButton.onclick = function () {
                     location.href = '/cms/seiteneditor/' + site._id;
                 };
 
@@ -270,11 +272,11 @@ function getAllSites() {
                 const deleteButton = document.createElement("button");
                 deleteButton.classList.add("trigger", "modal-site-edit-trigger");
                 deleteButton.innerHTML = `<span><i class="fa-solid fa-trash-can fa-lg"></i></span>`;
-                deleteButton.onclick = async function(){
-                    
+                deleteButton.onclick = async function () {
+
                     const check = window.confirm(`Möchten Sie die Seite "${site.titel}" wirklich löschen?`);
-                    
-                    if(check){
+
+                    if (check) {
                         const response = await deleteSite(site._id);
                         let result = await response.json();
 
@@ -296,13 +298,13 @@ function getAllSites() {
                 tbody.appendChild(tableRow);
             }
 
-        
+
         });
 }
 
 
 async function createSite(formData) {
-    
+
     return await fetch(apiUrl + 'site/create', {
         method: 'POST',
         body: new FormData(formData)
@@ -311,7 +313,7 @@ async function createSite(formData) {
 }
 
 async function editSite(siteId, formData) {
-    
+
     return await fetch(apiUrl + 'site/' + siteId + '/edit', {
         method: 'PUT',
         body: new FormData(formData)
@@ -324,7 +326,7 @@ async function deleteSite(id) {
     return await fetch(apiUrl + 'site/delete/' + id, {
         method: 'DELETE'
     });
-    
+
 }
 
 
@@ -333,7 +335,7 @@ async function deleteSite(id) {
 **********************************/
 
 async function login(formData) {
-    
+
     return await fetch(apiUrl + 'login', {
         method: 'POST',
         body: new FormData(formData)
@@ -342,7 +344,7 @@ async function login(formData) {
 }
 
 async function logout() {
-    
+
     return await fetch(apiUrl + 'logout', {
         method: 'POST'
     });
