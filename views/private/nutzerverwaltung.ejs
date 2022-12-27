@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/all.min.css"/>
     <script type="text/javascript" src="/js/fetchApi.js"></script>
     <script type="text/javascript" src="/js/auth/logout.js"></script>
+    <script type="text/javascript" src="/js/auth/session.js"></script>
 </head>
 <body>
 
@@ -17,7 +18,10 @@
 
         <ul class="dashboardnav">
             <a href="/cms/dashboard">DASHBOARD</a>
-            <button class="logout-btn" onclick="logoutUser()">Abmelden</button>
+            <div class="nav-info">
+                <p id="username"></p>
+                <button class="logout-btn" onclick="logoutUser()">Abmelden</button>
+            </div>
         </ul>
 
     </header>

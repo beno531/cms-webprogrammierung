@@ -2,6 +2,7 @@
 
 window.onload = function(){ 
     getAllMedia();
+    displayUsername();
 };
   
 //#endregion
@@ -17,10 +18,12 @@ uploadMediaForm.onsubmit = async (e) => {
   
 
   if(response.status == 200){
+    uploadMediaForm.reset();
     toggleUploadMediaModal();
     getAllMedia();
     alert(result);
   }else{
+    uploadMediaForm.reset();
     alert(result);
   }
 };

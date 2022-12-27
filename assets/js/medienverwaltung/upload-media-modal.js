@@ -4,7 +4,7 @@ const mediaModalContent = `
     <h1>Medienupload:</h1>
     <form ref='uploadMediaForm' 
     name='uploadMediaForm'>
-        <input type="file" name="sampleFile" />
+        <input id="fileInput" type="file" name="sampleFile" />
         <input type='submit' value='Upload' />
     </form>
 </div>`;

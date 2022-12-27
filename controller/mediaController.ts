@@ -22,7 +22,7 @@ async function createMedia(req, res) {
     let uploadPath;
 
     if (!req.files || Object.keys(req.files).length === 0) {
-        return res.status(400).send('No files were uploaded.');
+        return res.status(400).json('Es wurde keine Dtaei hochgeladen');
     }
 
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
@@ -32,18 +32,14 @@ async function createMedia(req, res) {
 
     uploadPath = UPLOADPATH + sampleFile.name;
 
-
-    // Check ob Dateiname schon vorhanden ist
-    fs.readdirSync(testFolder).forEach(file => {
-        if (file == sampleFile.name) {
-            return res.status(500).send("File already exists! Please change the name of the file!");
-        }
-    });
+    if (fs.existsSync(uploadPath)) {
+        return res.status(400).json('Die Datei existiert bereits! Bitte wählen Sie einen anderen Namen.');
+    }
 
     // Use the mv() method to place the file somewhere on your server
     sampleFile.mv(uploadPath, async function (err: any) {
         if (err) {
-            return res.status(500).send(err);
+            return res.status(500).json(err);
         }
 
         // Media in DB enlegen
@@ -55,10 +51,10 @@ async function createMedia(req, res) {
 
         try {
             const dataToSave = await data.save();
-            res.status(200).json("Der Upload war erfolgreich!");
+            return res.status(200).json("Der Upload war erfolgreich!");
         }
         catch (error: any) {
-            res.status(400).json(error.message);
+            return res.status(400).json(error.message);
         }
     });
 }

@@ -17,6 +17,8 @@ async function login(req, res){
 
         var result = await User.findOne({ benutzername: loginUser.username }).exec();
 
+        console.log(result);
+
         var check = await SecurityMaster.checkPassword(loginUser.password, result.passwort);
 
         if (check) {

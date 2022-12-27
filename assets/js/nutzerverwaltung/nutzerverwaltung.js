@@ -2,6 +2,7 @@
 
 window.onload = function(){ 
   getAllUser();
+  displayUsername();
 };
 
 //#endregion

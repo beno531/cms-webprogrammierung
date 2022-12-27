@@ -1,17 +1,22 @@
+
 //#region Login
 
 loginForm.onsubmit = async (e) => {
     e.preventDefault();
-  
-    var response = await login(loginForm);
-  
-    if(response.status == 200){
 
-
-      location.href = '/cms/dashboard';
-
+    if (!navigator.cookieEnabled) {
+      alert("Sie haben Cookies in Ihrem Browser deaktiviert! Um sich anmelden zu können, müssen Cookies aktiviert sein.")
     }else{
-      alert("Login ist fehlgeschlagen!");
+      var response = await login(loginForm);
+  
+      if(response.status == 200){
+  
+  
+        location.href = '/cms/dashboard';
+  
+      }else{
+        alert("Login ist fehlgeschlagen!");
+      }
     }
   };
   

@@ -260,6 +260,14 @@ function getAllSites() {
                 <td>${site.layout}</td>
                 <td>${erstelltAmDate}</td>`;
 
+                //Open Site Button
+                const openSiteButton = document.createElement("button");
+                //openSiteButton.classList.add("trigger", "modal-site-edit-trigger");
+                openSiteButton.innerHTML = `<span><i class="fa-solid fa-arrow-up-right-from-square"></i></span>`;
+                openSiteButton.onclick = function () {
+                    location.href = '/' + site.titel;
+                };
+
                 //Edit Button
                 const editButton = document.createElement("button");
                 editButton.classList.add("trigger", "modal-site-edit-trigger");
@@ -290,6 +298,7 @@ function getAllSites() {
                 //Create Options td
                 const tdOptions = document.createElement("td");
                 tdOptions.classList.add("options");
+                tdOptions.appendChild(openSiteButton);
                 tdOptions.appendChild(editButton);
                 tdOptions.appendChild(deleteButton);
 
