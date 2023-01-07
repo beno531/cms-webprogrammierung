@@ -7,7 +7,7 @@ async function home(req, res){
 
     const list = await Site.find({layout: "Unterseite"}).select('titel');
 
-    res.render('../views/public/index', {
+    res.render('../views/public/' + data.titel, {
         site: data,
         unterseiten: list
     });

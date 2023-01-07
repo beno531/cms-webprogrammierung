@@ -82,10 +82,6 @@ function getAllUser() {
 
         });
 
-
-
-
-
 }
 
 async function createUser(formData) {
@@ -239,7 +235,7 @@ function getAllSites() {
             <th width="35%">Beschreibung</th>
             <th width="10%">Layout</th>
             <th width="10%">Erstellt am</th>
-            <th width="100px">Optionen</th>
+            <th width="130px">Optionen</th>
             </tr></thead>`;
 
             var tbody = document.createElement("tbody");
@@ -262,10 +258,13 @@ function getAllSites() {
 
                 //Open Site Button
                 const openSiteButton = document.createElement("button");
-                //openSiteButton.classList.add("trigger", "modal-site-edit-trigger");
                 openSiteButton.innerHTML = `<span><i class="fa-solid fa-arrow-up-right-from-square"></i></span>`;
                 openSiteButton.onclick = function () {
-                    location.href = '/' + site.titel;
+                    if (site.layout == "Hauptseite") {
+                        window.open('/', '_blank').focus();
+                    }else{
+                        window.open('/' + site.titel, '_blank').focus();
+                    }
                 };
 
                 //Edit Button

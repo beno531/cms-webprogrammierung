@@ -6,24 +6,13 @@ html {
 }
 body {
   height: 100%;/* it can grow */
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: column;
-      -ms-flex-flow: column;
           flex-flow: column;
   margin: 0;/* reset */
   font-family: sans-serif;
 }
 section {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-      -ms-flex: 1;
           flex: 1;/* fill up whole space avalaible */
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;/* inbrication for side by side same height children */
 }
 header {
@@ -32,9 +21,6 @@ header {
 }
 main {
   padding: 2em;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-      -ms-flex: 1;
           flex: 1/* fill up whole space avalaible */
 }
 aside {

@@ -1,4 +1,8 @@
+import { DataSeeder } from "./DataSeeder/seed";
+import User from "./models/user";
+
 require('dotenv').config();
+
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -18,12 +22,19 @@ const swaggerFile = require('./swagger/swagger_output.json')
 const PORT = process.env.PORT || 8080;
 
 
-mongoose.connect(mongoString, function (err) {
+mongoose.connect(mongoString, async function (err) {
     if (err) {
         console.log(err);
+    }else{
+        User.countDocuments({}, async function( err, count){
+            console.log('Anzahl der Benutzer: ' + count);
+            if (count < 1) {
+                await DataSeeder.seed();
+            }
+        })
+        
+        console.log('Database Connected');
     }
-
-    console.log('Database Connected');
 });
 
 const app = express();

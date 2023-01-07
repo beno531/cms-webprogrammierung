@@ -30,51 +30,78 @@ async function createSite(req, res) {
     })
 
     // Schauen ob ein Punkt im Titel steht.
-    if(data.titel.includes('.') || data.titel.includes('html')){
-        res.status(400).json("Der Titel darf keinen Punkt oder eine Dateiendung beinhalten!");
-    }
-
-    // Ist Layout gleich Hauptseite, dann titel durch "index" ersetzen.
-    if(data.layout.includes('Hauptseite') || data.layout.includes('hauptseite')){
-        data.titel = "index";
-
-        var query = Site.find({ layout: 'Hauptseite' });
-        query.count(function (err, count) {
-            if (err) console.log(err)
-            
-            if(count >= 1){
-                res.status(400).json("Es kann nur maximal 1 Hauptseite angelegt werden!");
-            }
-        });
-    }
-
-    // Wie viele Unterseiten gibt es(wenn layout nicht hauptseite) -> max. 5 unterseiten
-    if(data.layout.includes('Unterseite') || data.layout.includes('unterseite')){
+    if(data.titel.includes('.') || data.titel.includes('html') || data.titel.includes('htm')){
+        return res.status(400).json("Der Titel darf keinen Punkt oder eine Dateiendung beinhalten!");
+    } else if (data.layout.includes('Hauptseite') || data.layout.includes('hauptseite')) {
         
+        // Überprüfe wie viele Hauptseiten es gibt.
+        var query = Site.find({ layout: 'Hauptseite' });
+        if(await query.count() >= 1){
+            return res.status(400).json("Es kann nur maximal 1 Hauptseite angelegt werden!");
+        }
+
+        
+        // Seite in der DB erstellen
+        var response;
+        try {
+
+            const dataToSave = await data.save();
+            response = dataToSave;
+        }
+        catch (error: any) {
+            return res.status(400).json(error.message);
+        }
+
+
+
+        // Erstellen der HTML Datei
+        try {
+
+            var content = `<%- include('partials/_header') %>
+            <%- include('partials/_mainNav') %>
+                
+                
+                <main>
+                <%- site.inhalt %>
+                </main>
+
+            <%- include('partials/_footer') %>`;
+
+            fs.writeFile(__dirname + "/../views/public/" + data.titel + '.ejs', content, function (err) {
+                if (err) throw err;
+                console.log('File is created successfully.');
+            });
+            
+        } catch (error: any) {
+            return res.status(400).json(error.message);
+        }
+
+
+    } else if (data.layout.includes('Unterseite') || data.layout.includes('unterseite')) {
+        
+        //Wie viele Unterseiten gibt es (wenn layout nicht hauptseite) -> max. 5 Unterseiten
         var query = Site.find({ layout: 'Unterseite' });
         query.count(function (err, count) {
             if (err) console.log(err)
             
+            return count;
             if(count >= 5){
-                res.status(400).json("Es können nur maximal 5 Unterseiten angelegt werden!");
+                return res.status(400).json("Es können nur maximal 5 Unterseiten angelegt werden!");
             }
-        });
-    }
+        })
 
-    // Seite in der DB erstellen
+        // Seite in der DB erstellen
+        var response;
+        try {
 
-    var response;
-    try {
+            const dataToSave = await data.save();
+            response = dataToSave;
+        }
+        catch (error: any) {
+            res.status(400).json(error.message);
+        }
 
-        const dataToSave = await data.save();
-        response = dataToSave;
-    }
-    catch (error: any) {
-        res.status(400).json(error.message);
-    }
-
-    // Erstellen der HTML Datei
-    if(data.layout.includes('Unterseite') || data.layout.includes('unterseite')){
+        // Erstellen der HTML Datei
         try {
 
             var content = `<%- include('partials/_header') %>
@@ -84,7 +111,7 @@ async function createSite(req, res) {
                 <%- site.inhalt %>
             </main>
             
-            <%- include('partials/_footer') %>`
+            <%- include('partials/_footer') %>`;
 
             fs.writeFile(__dirname + "/../views/public/" + data.titel + '.ejs', content, function (err) {
                 if (err) throw err;
