@@ -31,15 +31,15 @@ uploadMediaForm.onsubmit = async (e) => {
 
     let result = await response.json();
 
-    console.log(result);
-
-
+    
 
     if (response.status == 200) {
+        uploadMediaForm.reset();
         toggleUploadMediaModal();
         appendItemToTable(result);
         alert("Der Upload von " + result.bezeichnung + " war erfolgreich!");
     } else {
+        uploadMediaForm.reset();
         alert(result);
     }
 };
@@ -48,6 +48,9 @@ uploadMediaForm.onsubmit = async (e) => {
 
 
 function appendItemToTable(item) {
+
+    
+
 
     const mediaTable = document.querySelector("#editorMedienverwaltung");
 
@@ -63,8 +66,9 @@ function appendItemToTable(item) {
       </button>
     </td>`
 
-    mediaTable.appendChild(data);
+    console.log(mediaTable);
 
+    mediaTable.appendChild(data);
 }
 
 
@@ -84,4 +88,3 @@ function cancelEdit() {
     location.href = '/cms/seitenverwaltung/';
   }
 }
-

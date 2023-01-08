@@ -68,6 +68,6 @@ app.use('/cms', privateRoutes);
 app.use('/api', apiRoutes);
 
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log(`App listening at port ${PORT}`)
 })

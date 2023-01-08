@@ -32,12 +32,14 @@
         }
 
         .two {
+            display: flex;
             flex: 1 1 25em;
+            flex-flow: column;
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
             padding: 20px;
             background-color: rgb(255, 255, 255);
             height: 100%;
-            overflow-y: scroll;
+            overflow-y: hidden;
         }
 
         textarea {
@@ -47,10 +49,24 @@
         }
 
         #editSiteForm {
-
             display: flex;
             flex-direction: column;
         }
+
+        #editorMedienverwaltung{
+            box-shadow: none !important;
+            margin: 0px !important;
+        }
+
+        .media-table-layout{
+            display: block;
+            height: 100%;
+            width: 100%;
+            margin-top: 20px;
+            overflow-y: scroll;
+        }
+
+
     </style>
 </head>
 <body style="height: 100vh;background-color: rgb(235, 235, 235);overflow: hidden;">
@@ -72,7 +88,7 @@
                 <textarea style="height: 100%;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
                 border: none;
-                " id="inhalt" name="inhalt" placeholder="Hier HTML-Body einfügen"><% if(site){ %><%= site.inhalt %><% } %></textarea>
+                " id="inhalt" name="inhalt" placeholder="Hier HTML-Body einfügen" oninput="syntaxMarker()"><% if(site){ %><%= site.inhalt %><% } %></textarea>
                 <div style="height: 60px;">
                     <input type='submit' value='Speichern' />
                     <button type="button" class="editor-cancel-btn" onclick="cancelEdit()">Abbrechen</button>
@@ -103,34 +119,35 @@
             <button class="trigger header-button" id="modal-upload-media-trigger">Upload</button>
             </div>
 
+                <div class="media-table-layout">
 
-            <table class="styled-table">
-                <thead>
-                    <tr>
-                        <th width='100%'>Bezeichnung</th>
-                        <th width='100px'>Optionen</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if(media){ %>
-                        <% for(var i = 0; i < media.length; i++) { %>
-                            <tr>
-                                <td><%- media[i].bezeichnung %></td>
-                                <td class="options">
-                                    <button onclick="toggleViewMediaModal();loadViewMediaModal('<%- media[i].link %>')">
-                                        <span><i class="fa-solid fa-eye fa-lg"></i></span>
-                                    </button>
-                                    <button onclick="copyLinkToClipboard('<%- media[i].link %>')">
-                                        <span><i class="fa-solid fa-clipboard fa-lg"></i></span>
-                                    </button>
-                                </td>
-                            </tr>
+                <table id="editorMedienverwaltung" class="styled-table">
+                    <thead>
+                        <tr>
+                            <th width='100%'>Bezeichnung</th>
+                            <th width='100px'>Optionen</th>
+                        </tr>
+                    </thead>
+                    <tbody style="overflow-y: scroll;">
+                        <% if(media){ %>
+                            <% for(var i = 0; i < media.length; i++) { %>
+                                <tr>
+                                    <td><%- media[i].bezeichnung %></td>
+                                    <td class="options">
+                                        <button onclick="toggleViewMediaModal();loadViewMediaModal('<%- media[i].link %>')">
+                                            <span><i class="fa-solid fa-eye fa-lg"></i></span>
+                                        </button>
+                                        <button onclick="copyLinkToClipboard('<%- media[i].link %>')">
+                                            <span><i class="fa-solid fa-clipboard fa-lg"></i></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            <% } %>
                         <% } %>
-                    <% } %>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
 
-            
+            </div>
         </div>
           
     </section>

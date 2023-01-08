@@ -1,5 +1,4 @@
 "use strict";
-const apiUrl = "http://localhost:3000/api/";
 
 /*********************************
 ************** USER **************
@@ -7,7 +6,7 @@ const apiUrl = "http://localhost:3000/api/";
 
 function getAllUser() {
 
-    fetch(apiUrl + 'user', { cache: "no-store" })
+    fetch('/api/user', { cache: "no-store" })
         .then((response) => response.json())
         .then((data) => {
 
@@ -86,7 +85,7 @@ function getAllUser() {
 
 async function createUser(formData) {
 
-    return await fetch(apiUrl + 'user/create', {
+    return await fetch('/api/user/create', {
         method: 'POST',
         body: new FormData(formData)
     });
@@ -96,7 +95,7 @@ async function createUser(formData) {
 
 async function updateUser(username, formData) {
 
-    return await fetch(apiUrl + 'user/update/' + username, {
+    return await fetch('/api/user/update/' + username, {
         method: 'PUT',
         body: new FormData(formData)
     });
@@ -105,7 +104,7 @@ async function updateUser(username, formData) {
 
 async function deleteUser(username) {
 
-    return await fetch(apiUrl + 'user/delete/' + username, {
+    return await fetch('/api/user/delete/' + username, {
         method: 'DELETE'
     });
 
@@ -118,11 +117,7 @@ async function deleteUser(username) {
 
 function getAllMedia() {
 
-    fetch(apiUrl + 'media', {
-        headers: {
-            authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1tMTEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NzA3ODQyMzV9.iqX-MvxX2ZIBEPQSOP0aceGJyMeUDMtQdW1jP0v7Eyg"
-        }
-    })
+    fetch('/api/media')
         .then((response) => response.json())
         .then((data) => {
 
@@ -202,7 +197,7 @@ function getAllMedia() {
 
 async function createMedia(formData) {
 
-    return await fetch(apiUrl + 'media/upload', {
+    return await fetch('/api/media/upload', {
         method: 'POST',
         body: new FormData(formData)
     });
@@ -211,7 +206,7 @@ async function createMedia(formData) {
 
 async function deleteMedia(id) {
 
-    return await fetch(apiUrl + 'media/delete/' + id, {
+    return await fetch('/api/media/delete/' + id, {
         method: 'DELETE'
     });
 
@@ -223,7 +218,7 @@ async function deleteMedia(id) {
 
 function getAllSites() {
 
-    fetch(apiUrl + 'site')
+    fetch('/api/site')
         .then((response) => response.json())
         .then((data) => {
 
@@ -313,7 +308,7 @@ function getAllSites() {
 
 async function createSite(formData) {
 
-    return await fetch(apiUrl + 'site/create', {
+    return await fetch('/api/site/create', {
         method: 'POST',
         body: new FormData(formData)
     });
@@ -322,7 +317,7 @@ async function createSite(formData) {
 
 async function editSite(siteId, formData) {
 
-    return await fetch(apiUrl + 'site/' + siteId + '/edit', {
+    return await fetch('/api/site/' + siteId + '/edit', {
         method: 'PUT',
         body: new FormData(formData)
     });
@@ -331,7 +326,7 @@ async function editSite(siteId, formData) {
 
 async function deleteSite(id) {
 
-    return await fetch(apiUrl + 'site/delete/' + id, {
+    return await fetch('/api/site/delete/' + id, {
         method: 'DELETE'
     });
 
@@ -344,7 +339,7 @@ async function deleteSite(id) {
 
 async function login(formData) {
 
-    return await fetch(apiUrl + 'login', {
+    return await fetch('/api/login', {
         method: 'POST',
         body: new FormData(formData)
     });
@@ -353,7 +348,7 @@ async function login(formData) {
 
 async function logout() {
 
-    return await fetch(apiUrl + 'logout', {
+    return await fetch('/api/logout', {
         method: 'POST'
     });
 

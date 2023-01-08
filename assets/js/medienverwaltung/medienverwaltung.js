@@ -21,7 +21,7 @@ uploadMediaForm.onsubmit = async (e) => {
     uploadMediaForm.reset();
     toggleUploadMediaModal();
     getAllMedia();
-    alert(result);
+    alert("Der Upload von " + result.bezeichnung + " war erfolgreich!");
   }else{
     uploadMediaForm.reset();
     alert(result);

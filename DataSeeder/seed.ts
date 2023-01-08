@@ -16,7 +16,6 @@ export class DataSeeder {
 
             }];
 
-        //await User.deleteMany({});
         await User.insertMany(seedUser);
 
     }
