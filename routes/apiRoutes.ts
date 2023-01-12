@@ -7,6 +7,7 @@ const UserController = require('../controller/userController');
 const MediaController = require('../controller/mediaController');
 const SiteController = require('../controller/siteController');
 const AuthController = require('../controller/authController');
+const SettingsController = require('../controller/settingsController');
 
 module.exports = router;
 
@@ -71,3 +72,10 @@ router.post('/login', AuthController.login);
 
 // Logout
 router.post('/logout', SecurityMaster.authenticateToken, AuthController.logout);
+
+
+/*********************************
+************ Settings ************
+**********************************/
+
+router.post('/settings/css', SecurityMaster.authenticateToken, SettingsController.saveCss);

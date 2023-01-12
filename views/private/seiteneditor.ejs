@@ -88,7 +88,7 @@
                 <textarea style="height: 100%;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
                 border: none;
-                " id="inhalt" name="inhalt" placeholder="Hier HTML-Body einfügen" oninput="syntaxMarker()"><% if(site){ %><%= site.inhalt %><% } %></textarea>
+                " id="inhalt" name="inhalt" placeholder="Hier HTML-Body einfügen"><% if(site){ %><%= site.inhalt %><% } %></textarea>
                 <div style="height: 60px;">
                     <input type='submit' value='Speichern' />
                     <button type="button" class="editor-cancel-btn" onclick="cancelEdit()">Abbrechen</button>

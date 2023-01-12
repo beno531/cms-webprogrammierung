@@ -32,3 +32,6 @@ router.get('/seitenverwaltung', SecurityMaster.authenticateToken, PrivateViewCon
 
 // Seiteneditor
 router.get('/seiteneditor/:id', SecurityMaster.authenticateToken, PrivateViewController.getSeiteneditor);
+
+// Einstellungen
+router.get('/einstellungen', SecurityMaster.authenticateToken, PrivateViewController.getEinstellungen);

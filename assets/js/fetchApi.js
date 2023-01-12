@@ -353,3 +353,16 @@ async function logout() {
     });
 
 }
+
+/*********************************
+************ Settings ************
+**********************************/
+
+async function saveCss(formData) {
+
+    return await fetch('/api/settings/css', {
+        method: 'POST',
+        body: new FormData(formData)
+    });
+
+}

@@ -2,6 +2,11 @@ import Media from "../models/media";
 import Site from "../models/site";
 
 
+const SettingsController = require('../controller/settingsController');
+
+var fs = require('fs');
+
+
 // Get Login
 function getLogin(req, res){
 
@@ -48,6 +53,21 @@ async function getSeiteneditor(req, res){
         site: data,
         media: media
     });
+}
+
+// Get Einstellungen
+async function getEinstellungen(req, res) {
+
+    fs.readFile(__dirname + "/../assets/css/stylesheetpublic.css", 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+
+        res.render('../views/private/einstellungen', {
+            cssData: data
+        });
+    });
 
 }
 
@@ -57,5 +77,6 @@ module.exports = {
     getMedienverwaltung,
     getNutzerverwaltung,
     getSeitenverwaltung,
-    getSeiteneditor
+    getSeiteneditor,
+    getEinstellungen
 };

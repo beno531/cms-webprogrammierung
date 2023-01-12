@@ -1,4 +1,4 @@
-import { DataSeeder } from "./DataSeeder/seed";
+import { DataSeeder } from "./dataseeder/seed";
 import User from "./models/user";
 
 require('dotenv').config();
@@ -15,9 +15,6 @@ const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
 const path = require('path');
 const favicon = require('serve-favicon');
-
-const swaggerUi = require('swagger-ui-express')
-const swaggerFile = require('./swagger/swagger_output.json')
 
 const PORT = process.env.PORT || 8080;
 
@@ -57,9 +54,6 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 app.set('view engine', 'ejs');
-
-// Swagger Doc
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(favicon(__dirname + '/assets/img/favicon.ico'));
 
