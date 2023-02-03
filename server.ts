@@ -27,6 +27,7 @@ mongoose.connect(mongoString, async function (err) {
             console.log('Anzahl der Benutzer: ' + count);
             if (count < 1) {
                 await DataSeeder.seed();
+                console.log('User wurde erstellt!');
             }
         })
         

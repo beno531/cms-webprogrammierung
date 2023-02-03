@@ -1,10 +1,11 @@
 "use strict";
 
+
 /*********************************
 ************** USER **************
 **********************************/
 
-function getAllUser() {
+    function getAllUser() {
 
     fetch('/api/user', { cache: "no-store" })
         .then((response) => response.json())
@@ -115,83 +116,11 @@ async function deleteUser(username) {
 **********************************/
 
 
-function getAllMedia() {
+async function getAllMedia() {
 
-    fetch('/api/media')
-        .then((response) => response.json())
-        .then((data) => {
-
-
-            var table = document.getElementById('medienverwaltung');
-            table.innerHTML = `<thead><tr>
-            <th width="50%">Bezeichnung</th>
-            <th width="30%">Link</th>
-            <th width="10%">Erstellt am</th>
-            <th width="100px">Optionen</th>
-            </tr></thead>`;
-
-            var tbody = document.createElement("tbody");
-            table.appendChild(tbody);
-
-
-            for (const media of data) {
-
-
-                var erstelltAmDate = new Date(media.erstelltAm);
-                erstelltAmDate = erstelltAmDate.toLocaleDateString('de-DE');
-
-
-                const tableRow = document.createElement("tr");
-                tableRow.innerHTML = ` 
-                <td>${media.bezeichnung} </td>
-                <td>${media.link}</td>
-                <td>${erstelltAmDate}</td>`;
-
-
-                //View Button
-                const viewButton = document.createElement("button");
-                viewButton.innerHTML = `<span><i class="fa-solid fa-eye fa-lg"></i></span>`;
-                viewButton.onclick = function () {
-                    toggleViewMediaModal();
-                    loadViewMediaModal(media.link);
-                };
-
-                //Delete Button
-                const deleteButton = document.createElement("button");
-                deleteButton.innerHTML = `<span><i class="fa-solid fa-trash-can fa-lg"></i></span>`;
-                deleteButton.onclick = async function () {
-
-                    const check = window.confirm(`Möchten Sie diese Medium "${media.bezeichnung}" wirklich löschen?`);
-
-                    if (check) {
-                        const response = await deleteMedia(media._id);
-                        let result = await response.json();
-
-                        if (response.status == 200) {
-                            getAllMedia();
-                            alert(result);
-                        } else {
-                            alert(result);
-                        }
-                    }
-
-                };
-
-                //Create Options td
-                const tdOptions = document.createElement("td");
-                tdOptions.classList.add("options");
-                tdOptions.appendChild(viewButton);
-                tdOptions.appendChild(deleteButton);
-
-                tableRow.appendChild(tdOptions);
-
-                tbody.appendChild(tableRow);
-
-            }
-
-
-
-        });
+    return await fetch('/api/media', {
+        method: 'GET',
+    });
 
 }
 

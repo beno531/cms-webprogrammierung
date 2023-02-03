@@ -7,11 +7,17 @@ async function home(req, res){
 
     const list = await Site.find({layout: "Unterseite"}).select('titel');
 
-    res.render('../views/public/' + data.titel, {
-        site: data,
-        unterseiten: list
-    });
-
+    if(data){
+        res.render('../views/public/' + data.titel, {
+            site: data,
+            unterseiten: list
+        });
+    } else {
+        res.render('../views/public/index', {
+            site: data,
+            unterseiten: list
+        });
+    }
 }
 
 // Render Dynamic

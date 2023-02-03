@@ -10,7 +10,7 @@ var fs = require('fs');
 // Get Login
 function getLogin(req, res){
 
-    res.render('../views/private/login');
+    res.render('../views/private/login.ejs');
 
 }
 

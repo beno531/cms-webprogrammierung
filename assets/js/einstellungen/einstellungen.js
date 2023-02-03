@@ -1,26 +1,26 @@
-//#region Get all Users from API
+"use strict";
 
-window.onload = function(){ 
+window.onload = function () {
     displayUsername();
 };
-  
-//#endregion
-  
+
 async function saveCssChanges() {
-
-    //e.preventDefault();
-
-    console.log(editCssForm);
 
     var response = await saveCss(editCssForm);
 
-    console.log(response);
-    
+    if (response.status == 200) {
+        alert("Das Speichern war erfolgreich!");
+    } else {
+        alert(result);
+    }
+
 }
 
-function resetEdit(data) {
+// TODO
+/*
+function resetCssEdit(data) {
 
     let cssInput = document.querySelector("#css");
 
     editCssForm.css.value = data;
-}
+}*/

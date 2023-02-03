@@ -1,4 +1,5 @@
 import * as express from "express";
+import { send } from "process";
 import SecurityMaster from "../models/securityMaster";
 
 const path = require('path');
@@ -18,6 +19,9 @@ module.exports = router;
 // Login
 router.get('/login', PrivateViewController.getLogin);
 
+router.get('/test', function(req, res) {
+    res.send("asd")
+});
 // Dashboard
 router.get('/dashboard', SecurityMaster.authenticateToken, PrivateViewController.getDahsboard);
 

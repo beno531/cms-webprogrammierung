@@ -1,16 +1,13 @@
-//#region Get all Users from API
+"use strict";
 
+// Get all Users from API
 window.onload = function(){ 
   getAllUser();
   displayUsername();
 };
 
-//#endregion
-
-//#region Subscribe to Create-User-Form
-
-createUserForm.onsubmit = async (e) => {
-  e.preventDefault();
+// Subscribe to Create-User-Form
+async function createUserForm() {
 
   var response = await createUser(createUserForm);
 
@@ -21,17 +18,13 @@ createUserForm.onsubmit = async (e) => {
     toggleUserCreateModal();
     getAllUser();
     alert(result);
-  }else{
+  } else {
     alert(result);
   }
 };
 
-//#endregion
-
-//#region Subscribe to CreateUser-Form
-
-editUserForm.onsubmit = async (e) => {
-  e.preventDefault();
+// Subscribe to Edit-User-Form
+async function editUserForm() {
 
   const username = document.querySelector('#modal-user-edit #benutzername').value;
 
@@ -49,5 +42,3 @@ editUserForm.onsubmit = async (e) => {
     alert(result);
   }
 };
-
-//#endregion

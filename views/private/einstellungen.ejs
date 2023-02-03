@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="/css/stylesheetprivate.css">
     <title>Einstellungen</title>
 
-    <link rel="stylesheet" href="/css/all.min.css"/>
+    <link rel="stylesheet" href="/css/all.min.css" />
 
-        <script src="/js/fetchApi.js"></script>
-        <script type="text/javascript" src="/js/auth/logout.js"></script>
-        <script type="text/javascript" src="/js/auth/session.js"></script>
+    <script src="/js/fetchApi.js"></script>
+    <script type="text/javascript" src="/js/auth/logout.js"></script>
+    <script type="text/javascript" src="/js/auth/session.js"></script>
 </head>
 
 <body>
@@ -31,107 +31,48 @@
 
 
     <section>
-        
+
         <%- include('partials/_sideNav') %>
 
-        <main>
+            <main>
 
 
-                <div style="display: flex; justify-content: center;gap: 32px;height: 100%;">
-                
-                
-                
-                    <div style="width:100%;display: flex;flex-flow: column;">
-                        <h1>Allgemein:</h1>
 
-                        <div style=" box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;padding: 30px">
 
-                            <form name="generalSettings">
-                                    <label for="name">Titel:</label><br>
-                                    <input type="text" id="name" name="name"><br><br>
 
-                                    <label for="name">Logo:</label><br>
-                                    <input id="logoInput" type="file" name="logoInput" accept="image/png, image/gif, image/jpeg"/><br><br>
 
-                                    <label for="name">Banner:</label><br>
-                                    <input id="bannerInput" type="file" name="bannerInput" accept="image/png, image/gif, image/jpeg"/><br><br>
-                                    
-                    
-                                    <input type="submit" value="Speichern">
 
-                            </form>
+                <div style="display: flex;flex-flow: column;height: 100%;width: 100%;">
 
-                        </div>
-                    </div>
-                
-                    <div style="display: flex;flex-flow: column;height: 100%;width: 100%;">
-                
-                        <h1>CSS:</h1>
+                    <h1>CSS:</h1>
 
-                        <form id="editCssForm" name="editCssForm" style="height: 100%;display: flex; flex-flow: column;align-items: flex-end;">
-                            <textarea style="height: 100%;width: 100%;
+                    <form id="editCssForm" name="editCssForm"
+                        style="height: 100%;display: flex; flex-flow: column;align-items: flex-end;">
+                        <textarea style="height: 100%;width: 100%;
                             padding: 20px;
                                         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
                                         border: none;
-                                        " id="css" name="css" placeholder="Hier CSS einfügen"><% if(cssData){ %><%= cssData %><% } %></textarea>
-                            <script> var cssData = '<%-cssData%>'</script>
-                            <div style="height: 60px;">
-                                <!--<input type='submit' value='Speichern' />-->
-                                <button type="button" class="editor-cancel-btn" onclick="saveCssChanges()">Speichern</button>
-                                <!--<button type="button" class="editor-cancel-btn" onclick="resetEdit()">Zurücksetzen</button>-->
-                            </div>
-                        </form>
-                
-                
-                    </div>
-                
-                </div>
-
-
-
-                
-
-
-
-
-
-
-            <!--<div class="content-main" style="display: block; height: 100%; background-color: aqua;">
-
-                <div style="display: flex; justify-content: center;gap: 32px;height: 100%;">
-
-
-                </div>
-
-                <div style="width:100%; background-color: red;">1</div>
-
-                <div style="width:100%;height: 100%;">
-                
-                
-                    <form id="editSiteForm" name="editSiteForm" style="height: 100%;">
-                        <input type="hidden" id="siteId" name="siteId" value="Inhalt">
-                        <textarea style="height: 100%;width: 100%;
-                        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-                        border: none;
-                        " id="inhalt" name="inhalt" placeholder="Hier HTML-Body einfügen">Inhalt</textarea>
-                        <div style="height: 60px;float:right">
-                            <input type='submit' value='Speichern' />
-                            <button type="button" class="editor-cancel-btn" onclick="cancelEdit()">Abbrechen</button>
+                                        " id="css" name="css"
+                            placeholder="Hier CSS einfügen"><% if(cssData){ %><%= cssData %><% } %></textarea>
+                        <script> var cssData = '<%-cssData%>'</script>
+                        <div style="height: 60px;">
+                            <button type="button" class="editor-cancel-btn"
+                                onclick="saveCssChanges()">Speichern</button>
+                            <!--<button type="button" class="editor-cancel-btn" onclick="resetEdit()">Zurücksetzen</button>-->
                         </div>
-                    </form> 
-                
-                
+                    </form>
+
+
                 </div>
 
-            </div>-->
 
 
-        </main>
+            </main>
 
 
     </section>
 
-    
+
 
     <script src="/js/einstellungen/einstellungen.js"></script>
 </body>

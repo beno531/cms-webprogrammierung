@@ -32,7 +32,7 @@ async function login(req, res){
             res.cookie('auth', accessToken);
             res.json("Login war erfolgreich!");
         } else {
-            res.send('Username oder Passwort falsch!');
+            res.status(400).send('Username oder Passwort falsch!');
         }
 
 

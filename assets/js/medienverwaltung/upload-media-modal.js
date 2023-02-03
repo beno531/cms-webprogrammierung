@@ -1,3 +1,5 @@
+"use strict";
+
 const mediaModalContent = `
 <div class="modal-content">
     <span class="close-button" id="modal-upload-media-close-button">&times;</span>
@@ -5,7 +7,7 @@ const mediaModalContent = `
     <form ref='uploadMediaForm' 
     name='uploadMediaForm'>
         <input id="fileInput" type="file" name="sampleFile" />
-        <input type='submit' value='Upload' />
+        <button type="button" class="modal-btn" onclick="uploadMediaForm()">Upload</button>
     </form>
 </div>`;
 

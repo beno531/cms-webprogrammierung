@@ -1,7 +1,5 @@
-//#region Init
+"use strict";
 
 window.onload = function(){ 
     displayUsername();
 };
-  
-//#endregion

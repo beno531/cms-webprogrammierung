@@ -1,19 +1,16 @@
-//#region Logout
+"use strict";
 
 async function logoutUser() {
 
-    var response = await logout();
-  
-    if(response.status == 200){
+  var response = await logout();
 
-        //sessionStorage.setItem("cmsAuthToken", result.accessToken);
-        location.href = '/';
-        alert("Sie wurden abgemeldet!");
+  if (response.status == 200) {
 
-    }else{
-      alert("Logout ist fehlgeschlagen!");
-    }
-    
+    location.href = '/';
+    alert("Sie wurden abgemeldet!");
+
+  } else {
+    alert("Logout ist fehlgeschlagen!");
+  }
+
 }
-  
-//#endregion

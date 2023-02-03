@@ -49,7 +49,7 @@ async function createUser(req, res) {
 // Update User
 async function updateUser(req, res) {
 
-    if (req.user.role) {
+    if (req.user.role == "admin") {
 
         try {
             const username = req.params.username;
