@@ -4,7 +4,7 @@ window.onload = function () {
     displayUsername();
 };
 
-async function saveCssChanges() {
+async function formSaveCss() {
 
     var response = await saveCss(editCssForm);
 
@@ -16,11 +16,14 @@ async function saveCssChanges() {
 
 }
 
-// TODO
-/*
-function resetCssEdit(data) {
+async function formGetInitialCss() {
 
-    let cssInput = document.querySelector("#css");
+    var response = await getInitialCss();
+    let result = await response.json();
 
-    editCssForm.css.value = data;
-}*/
+    if (response.status == 200) {
+        editCssForm.css.value = result;
+    } else {
+        alert("Ein Fehler beim laden ist aufgetreten!");
+    }
+}

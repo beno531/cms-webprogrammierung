@@ -25,10 +25,13 @@ async function renderDynamic(req, res){
 
     const data = await Site.findOne({titel: req.params.titel}).select('titel autor beschreibung inhalt');
 
+    const main = await Site.findOne({layout: "Hauptseite"}).select('titel');
+
     const list = await Site.find({layout: "Unterseite"}).select('titel');
 
 
     res.render('../views/public/' + req.params.titel, {
+        main: main,
         site: data,
         unterseiten: list
     });

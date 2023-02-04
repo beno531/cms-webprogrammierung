@@ -1,86 +1,15 @@
 "use strict";
 
-
 /*********************************
 ************** USER **************
 **********************************/
 
-    function getAllUser() {
+async function getAllUser() {
 
-    fetch('/api/user', { cache: "no-store" })
-        .then((response) => response.json())
-        .then((data) => {
-
-            var table = document.getElementById('nutzerverwaltung');
-            table.innerHTML = `<thead><tr>
-            <th width="20%">Name</th>
-            <th width="20%">Vorname</th>
-            <th width="20%">Benutzername</th>
-            <th width="25%">Email</th>
-            <th width="10%">Rolle</th>
-            <th width="100px">Optionen</th>
-            </tr></thead>`;
-
-            var tbody = document.createElement("tbody");
-            table.appendChild(tbody);
-
-
-            for (const user of data) {
-
-                const tableRow = document.createElement("tr");
-                tableRow.innerHTML = ` 
-                <td>${user.name} </td>
-                <td>${user.vorname}</td>
-                <td>${user.benutzername}</td> 
-                <td>${user.email}</td>  
-                <td>${user.rolle}</td>`;
-
-
-                //Edit Button
-                const editButton = document.createElement("button");
-                editButton.classList.add("trigger", "modal-user-edit-trigger");
-                editButton.innerHTML = `<span><i class="fa-sharp fa-solid fa-pen"></i></span>`;
-                editButton.onclick = function () {
-                    toggleEditUserModal();
-                    loadUserDataModal(user);
-                };
-
-                //Delete Button
-                const deleteButton = document.createElement("button");
-                deleteButton.classList.add("trigger", "modal-user-edit-trigger");
-                deleteButton.innerHTML = `<span><i class="fa-solid fa-trash-can fa-lg"></i></span>`;
-                deleteButton.onclick = async function () {
-
-                    const check = window.confirm(`Möchten Sie den Benutzer "${user.name}, ${user.vorname}" mit der Kennung "${user.benutzername}" wirklich löschen?`);
-
-                    if (check) {
-                        const response = await deleteUser(user.benutzername);
-                        let result = await response.json();
-
-                        if (response.status == 200) {
-                            getAllUser();
-                            alert(result);
-                        } else {
-                            alert(result);
-                        }
-                    }
-
-                };
-
-                //Create Options td
-                const tdOptions = document.createElement("td");
-                tdOptions.classList.add("options");
-                tdOptions.appendChild(editButton);
-                tdOptions.appendChild(deleteButton);
-
-                tableRow.appendChild(tdOptions);
-
-                tbody.appendChild(tableRow);
-            }
-
-
-
-        });
+    return await fetch('/api/user', {
+        method: 'GET',
+        cache: "no-store"
+    });
 
 }
 
@@ -90,7 +19,6 @@ async function createUser(formData) {
         method: 'POST',
         body: new FormData(formData)
     });
-
 
 }
 
@@ -111,15 +39,16 @@ async function deleteUser(username) {
 
 }
 
+
 /*********************************
 ************** MEDIA *************
 **********************************/
-
 
 async function getAllMedia() {
 
     return await fetch('/api/media', {
         method: 'GET',
+        cache: "no-store"
     });
 
 }
@@ -141,99 +70,19 @@ async function deleteMedia(id) {
 
 }
 
+
 /*********************************
 ************** SITE **************
 **********************************/
 
-function getAllSites() {
+async function getAllSites() {
 
-    fetch('/api/site')
-        .then((response) => response.json())
-        .then((data) => {
+    return await fetch('/api/site', {
+        method: 'GET',
+        cache: "no-store"
+    });
 
-
-            var table = document.getElementById('seitenverwaltung');
-            table.innerHTML = `<thead><tr>
-            <th width='20%'>Titel</th>
-            <th width='20%'>Autor</th>
-            <th width="35%">Beschreibung</th>
-            <th width="10%">Layout</th>
-            <th width="10%">Erstellt am</th>
-            <th width="130px">Optionen</th>
-            </tr></thead>`;
-
-            var tbody = document.createElement("tbody");
-            table.appendChild(tbody);
-
-
-            for (const site of data) {
-
-                var erstelltAmDate = new Date(site.erstelltAm);
-                erstelltAmDate = erstelltAmDate.toLocaleDateString('de-DE');
-
-
-                var tableRow = document.createElement("tr");
-                tableRow.innerHTML = ` 
-                <td>${site.titel} </td>
-                <td>${site.autor}</td>
-                <td>${site.beschreibung}</td>
-                <td>${site.layout}</td>
-                <td>${erstelltAmDate}</td>`;
-
-                //Open Site Button
-                const openSiteButton = document.createElement("button");
-                openSiteButton.innerHTML = `<span><i class="fa-solid fa-arrow-up-right-from-square"></i></span>`;
-                openSiteButton.onclick = function () {
-                    if (site.layout == "Hauptseite") {
-                        window.open('/', '_blank').focus();
-                    }else{
-                        window.open('/' + site.titel, '_blank').focus();
-                    }
-                };
-
-                //Edit Button
-                const editButton = document.createElement("button");
-                editButton.classList.add("trigger", "modal-site-edit-trigger");
-                editButton.innerHTML = `<span><i class="fa-sharp fa-solid fa-pen"></i></span>`;
-                editButton.onclick = function () {
-                    location.href = '/cms/seiteneditor/' + site._id;
-                };
-
-                //Delete Button
-                const deleteButton = document.createElement("button");
-                deleteButton.classList.add("trigger", "modal-site-edit-trigger");
-                deleteButton.innerHTML = `<span><i class="fa-solid fa-trash-can fa-lg"></i></span>`;
-                deleteButton.onclick = async function () {
-
-                    const check = window.confirm(`Möchten Sie die Seite "${site.titel}" wirklich löschen?`);
-
-                    if (check) {
-                        const response = await deleteSite(site._id);
-                        let result = await response.json();
-
-                        getAllSites();
-
-                        alert(result);
-                    }
-
-                };
-
-                //Create Options td
-                const tdOptions = document.createElement("td");
-                tdOptions.classList.add("options");
-                tdOptions.appendChild(openSiteButton);
-                tdOptions.appendChild(editButton);
-                tdOptions.appendChild(deleteButton);
-
-                tableRow.appendChild(tdOptions);
-
-                tbody.appendChild(tableRow);
-            }
-
-
-        });
 }
-
 
 async function createSite(formData) {
 
@@ -292,6 +141,14 @@ async function saveCss(formData) {
     return await fetch('/api/settings/css', {
         method: 'POST',
         body: new FormData(formData)
+    });
+
+}
+
+async function getInitialCss() {
+
+    return await fetch('/api/settings/css/initial', {
+        method: 'GET',
     });
 
 }

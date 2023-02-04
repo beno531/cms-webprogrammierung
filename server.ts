@@ -58,9 +58,15 @@ app.set('view engine', 'ejs');
 
 app.use(favicon(__dirname + '/assets/img/favicon.ico'));
 
+
 app.use('/', publicRoutes);
 app.use('/cms', privateRoutes);
 app.use('/api', apiRoutes);
+
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(404).send('Diese Aktion wurde nicht gefunden!')
+});
 
 
 app.listen(PORT, () => {

@@ -90,7 +90,7 @@
                 border: none;
                 " id="inhalt" name="inhalt" placeholder="Hier HTML-Body einfügen"><% if(site){ %><%= site.inhalt %><% } %></textarea>
                 <div style="height: 60px;">
-                    <input type='submit' value='Speichern' />
+                    <button type="button" class="modal-btn" onclick="formEditSite()">Speichern</button>
                     <button type="button" class="editor-cancel-btn" onclick="cancelEdit()">Abbrechen</button>
                 </div>
             </form> 
@@ -134,7 +134,7 @@
                                 <tr>
                                     <td><%- media[i].bezeichnung %></td>
                                     <td class="options">
-                                        <button onclick="toggleViewMediaModal();loadViewMediaModal('<%- media[i].link %>')">
+                                        <button onclick="window.open('<%- media[i].link %>', '_blank').focus()">
                                             <span><i class="fa-solid fa-eye fa-lg"></i></span>
                                         </button>
                                         <button onclick="copyLinkToClipboard('<%- media[i].link %>')">

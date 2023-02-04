@@ -54,57 +54,6 @@
 
     </section>
 
-    <!-- Create User Modal -->
-    <div class="modal" id="modal-user-create">
-        <div class="modal-content">
-            <span class="close-button" id="modal-user-create-close-button">&times;</span>
-            <h1>Neuen User anlegen:</h1>
-            <form name="createUserForm">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name"><br>
-                <label for="vorname">Vorname:</label><br>
-                <input type="text" id="vorname" name="vorname"><br>
-                <label for="benutzername">Benutzername:</label><br>
-                <input type="text" id="benutzername" name="benutzername"><br>
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email"><br>
-                <label for="rolle">Rolle:</label><br>
-                <select name="rolle" id="rolle">
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                </select><br>
-                <label for="passwort">Passwort:</label><br>
-                <input type="password" id="passwort" name="passwort"><br>
-
-                <button type="button" class="modal-btn" onclick="createUserForm()">Erstellen</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Edit User Modal -->
-    <div class="modal" id="modal-user-edit">
-        <div class="modal-content">
-            <span class="close-button" id="modal-user-edit-close-button">&times;</span>
-            <h1>User editieren:</h1>
-            <form name="editUserForm">
-                <input type="hidden" id="benutzername" name="benutzername">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name"><br>
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email"><br>
-                <label for="rolle">Rolle:</label><br>
-                <select name="rolle" id="rolle">
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                </select><br>
-
-                <button type="button" class="modal-btn" onclick="editUserForm()">Speichern</button>
-            </form>
-        </div>
-    </div>
-
-
-
     <script type="text/javascript" src="/js/nutzerverwaltung/nutzerverwaltung.js" defer></script>
     <script type="text/javascript" src="/js/nutzerverwaltung/create-user-modal.js" defer></script>
     <script type="text/javascript" src="/js/nutzerverwaltung/edit-user-modal.js" defer></script>

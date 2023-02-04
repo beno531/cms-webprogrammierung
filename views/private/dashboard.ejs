@@ -9,7 +9,7 @@
     <title>Dashboard</title>
 
 
-    <link rel="stylesheet" href="/css/all.min.css"/>
+    <link rel="stylesheet" href="/css/all.min.css" />
 
     <script type="text/javascript" src="/js/auth/logout.js"></script>
     <script type="text/javascript" src="/js/fetchApi.js"></script>
@@ -19,31 +19,26 @@
 
 <body>
 
-        <header>
+    <header>
 
-            <ul class="dashboardnav">
-                <a href="/cms/dashboard">DASHBOARD</a>
-                <div class="nav-info">
-                    <p id="username"></p>
-                    <button class="logout-btn" onclick="logoutUser()">Abmelden</button>
-                </div>
-            </ul>
+        <ul class="dashboardnav">
+            <a href="/cms/dashboard">DASHBOARD</a>
+            <div class="nav-info">
+                <p id="username"></p>
+                <button class="logout-btn" onclick="logoutUser()">Abmelden</button>
+            </div>
+        </ul>
 
-        </header>
+    </header>
 
-        <section>
+    <section>
 
-            <%- include('partials/_sideNav') %>
+        <%- include('partials/_sideNav') %>
 
-            <main>
+        <main></main>
 
-                
-            </main>
+    </section>
 
-
-        </section>
-
-    
 </body>
 
 </html>

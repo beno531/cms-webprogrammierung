@@ -78,4 +78,8 @@ router.post('/logout', SecurityMaster.authenticateToken, AuthController.logout);
 ************ Settings ************
 **********************************/
 
+// Save CSS
 router.post('/settings/css', SecurityMaster.authenticateToken, SettingsController.saveCss);
+
+// Get initial CSS
+router.get('/settings/css/initial', SecurityMaster.authenticateToken, SettingsController.getInitialCss);

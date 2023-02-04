@@ -1,5 +1,5 @@
 {
-  "name": "cms-api",
+  "name": "cms",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -7,7 +7,7 @@
   "scripts": {
     "start": "nodemon server.ts"
   },
-  "author": "",
+  "author": "Alexander Thofern, Benito Ernst",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -21,7 +21,6 @@
     "mongoose": "^6.7.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
-    "request": "^2.88.2",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {

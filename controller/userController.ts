@@ -54,8 +54,6 @@ async function updateUser(req, res) {
         try {
             const username = req.params.username;
 
-            console.log(username);
-
             const updatedData = {
                 name: req.body.name,
                 email: req.body.email,
@@ -73,8 +71,6 @@ async function updateUser(req, res) {
                 const result = await User.findOneAndUpdate(
                     { benutzername: username }, updatedData, options
                 )
-
-                console.log(result);
 
                 if (username == req.user.role) {
                     const accessToken = await SecurityMaster.updateToken(username);

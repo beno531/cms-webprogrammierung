@@ -5,7 +5,7 @@ window.onload = function(){
     displayUsername();
 };
 
-async function uploadMediaForm(){
+async function formUploadMedia(){
 
   var response = await createMedia(uploadMediaForm);
 

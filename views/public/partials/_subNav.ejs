@@ -7,7 +7,15 @@
                 <img src="/img/logo.png" alt="">
             </div>
             <div class="nav-title">
-                <h2>Firmenname</h2>
+                <h2>
+                    
+                    <% if(main){ %>
+                        <%- main.titel %>
+                      <% } else{ %>  
+                        Firmenname
+                     <% } %>
+
+                </h2>
             </div>
         </div>
         <div class="nav-btn">
@@ -19,7 +27,7 @@
         </div>
         
         <div class="nav-links">
-            <a href="/">Hauptseite</a>
+            <a href="/">Startseite</a>
         <% if(unterseiten){ %>
         <% for(var i = 0; i <= unterseiten.length - 1; i++) { %>
             <a href="<%= unterseiten[i].titel %>"><%= unterseiten[i].titel %></a>

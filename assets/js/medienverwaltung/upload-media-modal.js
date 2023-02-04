@@ -7,7 +7,7 @@ const mediaModalContent = `
     <form ref='uploadMediaForm' 
     name='uploadMediaForm'>
         <input id="fileInput" type="file" name="sampleFile" />
-        <button type="button" class="modal-btn" onclick="uploadMediaForm()">Upload</button>
+        <button type="button" class="modal-btn" onclick="formUploadMedia()">Upload</button>
     </form>
 </div>`;
 
