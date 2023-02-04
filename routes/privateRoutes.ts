@@ -14,14 +14,9 @@ module.exports = router;
 ************ PRIVATE *************
 **********************************/
 
-
-
 // Login
 router.get('/login', PrivateViewController.getLogin);
 
-router.get('/test', function(req, res) {
-    res.send("asd")
-});
 // Dashboard
 router.get('/dashboard', SecurityMaster.authenticateToken, PrivateViewController.getDahsboard);
 

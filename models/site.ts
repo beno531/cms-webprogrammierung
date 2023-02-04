@@ -28,11 +28,6 @@ export const dataSchema = new mongoose.Schema({
         type: String,
     }
 
-    /* TODO
-        - Firmenlogo (Image)
-        - Header Image (Nur bei Index)
-    */
-
 })
 
 const Site = mongoose.model('Site', dataSchema)

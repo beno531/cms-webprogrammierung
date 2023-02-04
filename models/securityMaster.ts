@@ -15,8 +15,8 @@ export class SecurityMaster {
 
   }
 
-  public static async checkPassword(password: string, hash: string) {
-    return await bcrypt.compareSync(password, hash);
+  public static async checkPassword(password: string, dbPassword: string) {
+    return await bcrypt.compareSync(password, dbPassword);
   }
 
   public static async updateToken(username) {

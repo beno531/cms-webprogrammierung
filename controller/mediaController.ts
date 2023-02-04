@@ -59,17 +59,6 @@ async function createMedia(req, res) {
     });
 }
 
-// Get Media Link
-async function getMediaLink(req, res){
-    try {
-        const data = await Media.findById(req.params.id);
-        res.json(data.link)
-    }
-    catch (error: any) {
-        res.status(500).json({ message: error.message })
-    }
-}
-
 // Delete Media
 async function deleteMedia(req, res){
     try {
@@ -90,6 +79,5 @@ async function deleteMedia(req, res){
 module.exports = {
     getAllMedia,
     createMedia,
-    getMediaLink,
     deleteMedia
 };

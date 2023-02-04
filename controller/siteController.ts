@@ -84,6 +84,7 @@ async function createSite(req, res) {
         query.count(function (err, count) {
             if (err) console.log(err)
             
+            // TODO
             return count;
             if(count >= 5){
                 return res.status(400).json("Es können nur maximal 5 Unterseiten angelegt werden!");
@@ -132,7 +133,6 @@ async function editSite(req, res){
     try {
         const siteId = req.params.id;
 
-        console.log(siteId);
 
         const updatedData = {
             inhalt: req.body.inhalt,

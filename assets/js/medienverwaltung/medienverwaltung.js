@@ -24,8 +24,6 @@ async function formUploadMedia(){
 };
 
 function appendItemToTable(item) {
-
-  console.log(item);
   
   const mediaTable = document.querySelector("#medienverwaltung");
 

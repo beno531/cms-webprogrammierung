@@ -33,14 +33,11 @@ router.delete('/user/delete/:username', SecurityMaster.authenticateToken, UserCo
 ************** MEDIA *************
 **********************************/
 
-// Create Media
-router.post('/media/upload', SecurityMaster.authenticateToken, MediaController.createMedia);
-
 // GetAll Media
 router.get('/media', SecurityMaster.authenticateToken, MediaController.getAllMedia);
 
-// Get Media Link
-router.get('/media/:id/link', SecurityMaster.authenticateToken, MediaController.getMediaLink);
+// Create Media
+router.post('/media/upload', SecurityMaster.authenticateToken, MediaController.createMedia);
 
 // Delete Media
 router.delete('/media/delete/:id', SecurityMaster.authenticateToken, MediaController.deleteMedia);

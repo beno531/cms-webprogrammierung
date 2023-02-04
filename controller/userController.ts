@@ -72,6 +72,7 @@ async function updateUser(req, res) {
                     { benutzername: username }, updatedData, options
                 )
 
+                // TODO
                 if (username == req.user.role) {
                     const accessToken = await SecurityMaster.updateToken(username);
                     res.clearCookie('auth');
