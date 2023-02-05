@@ -1,9 +1,8 @@
 import express from "express";
 import SecurityMaster from "../models/securityMaster.js";
+import PrivateViewController from "../controller/privateViewController.js";
 
 const router = express.Router();
-
-import PrivateViewController from "../controller/privateViewController.js";
 
 
 /*********************************

@@ -1,3 +1,5 @@
+"use strict";
+
 import Media from "../models/media.js";
 import Site from "../models/site.js";
 
@@ -9,77 +11,76 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+class PrivateViewController {
 
-// Get Login
-function getLogin(req, res){
+    // Get Login
+    static getLogin(req, res) {
 
-    res.render('../views/private/login.ejs');
+        res.render('../views/private/login.ejs');
 
-}
+    }
 
-// Get Dashboard
-function getDahsboard(req, res){
+    // Get Dashboard
+    static getDahsboard(req, res) {
 
-    res.render('../views/private/dashboard');
+        res.render('../views/private/dashboard');
 
-}
+    }
 
-// Get Medienverwaltung
-async function getMedienverwaltung(req, res){
+    // Get Medienverwaltung
+    static async getMedienverwaltung(req, res) {
 
-    res.render('../views/private/medienverwaltung');
+        res.render('../views/private/medienverwaltung');
 
-}
+    }
 
-// Get Nutzerverwaltung
-function getNutzerverwaltung(req, res){
+    // Get Nutzerverwaltung
+    static getNutzerverwaltung(req, res) {
 
-    res.render('../views/private/nutzerverwaltung');
+        res.render('../views/private/nutzerverwaltung');
 
-}
+    }
 
-// Get Seitenverwaltung
-function getSeitenverwaltung(req, res){
+    // Get Seitenverwaltung
+    static getSeitenverwaltung(req, res) {
 
-    res.render('../views/private/seitenverwaltung');
+        res.render('../views/private/seitenverwaltung');
 
-}
+    }
 
-// Get Seiteneditor
-async function getSeiteneditor(req, res){
+    // Get Seiteneditor
+    static async getSeiteneditor(req, res) {
 
-    const data = await Site.findOne({_id: req.params.id});
+        // Sucht die entsprechende Seite anhand der übermittelten Id in der Datenbank
+        const data = await Site.findOne({ _id: req.params.id });
 
-    const media = await Media.find();
+        // Holt alle Media Datensätze aus der Datenbank
+        const media = await Media.find();
 
-    res.render('../views/private/seiteneditor', {
-        site: data,
-        media: media
-    });
-}
-
-// Get Einstellungen
-async function getEinstellungen(req, res) {
-
-    fs.readFile(__dirname + "/../assets/css/stylesheetpublic.css", 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-
-        res.render('../views/private/einstellungen', {
-            cssData: data
+        res.render('../views/private/seiteneditor', {
+            site: data,
+            media: media
         });
-    });
+    }
 
+    // Get Einstellungen
+    static async getEinstellungen(req, res) {
+
+        // Liest die CSS Datei für den Public Bereich aus
+        fs.readFile(__dirname + "/../assets/css/stylesheetpublic.css", 'utf8', (err, data) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+
+            res.render('../views/private/einstellungen', {
+                cssData: data
+            });
+        });
+
+    }
 }
 
-export default {
-    getLogin,
-    getDahsboard,
-    getMedienverwaltung,
-    getNutzerverwaltung,
-    getSeitenverwaltung,
-    getSeiteneditor,
-    getEinstellungen
-};
+
+
+export default PrivateViewController;

@@ -1,12 +1,12 @@
 import express from "express";
-const router = express.Router();
-
 import SecurityMaster from "../models/securityMaster.js";
 import UserController from "../controller/userController.js";
 import MediaController from "../controller/mediaController.js";
 import SiteController from "../controller/siteController.js";
 import AuthController from "../controller/authController.js";
 import SettingsController from "../controller/settingsController.js";
+
+const router = express.Router();
 
 
 /*********************************

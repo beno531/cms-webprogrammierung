@@ -1,8 +1,7 @@
 import express from "express";
+import PublicViewController from "../controller/publicViewController.js";
 
 const router = express.Router();
-
-import PublicViewController from "../controller/publicViewController.js";
 
 
 

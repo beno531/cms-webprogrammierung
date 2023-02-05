@@ -1,7 +1,6 @@
 "use strict";
 
 import User from "./user.js";
-
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
@@ -24,7 +23,7 @@ class SecurityMaster {
   static async updateToken(username) {
 
     try {
-      var result = await User.findOne({ benutzername: username }).exec();
+      let result = await User.findOne({ benutzername: username }).exec();
 
       const jwtSecret = process.env.JWT_SECRET;
 
@@ -68,7 +67,6 @@ class SecurityMaster {
       next()
     })
   }
-
 }
 
 export default SecurityMaster;
