@@ -1,4 +1,4 @@
-import Site from  '../models/site';
+import Site from  '../models/site.js';
 
 // Home
 async function home(req, res){
@@ -38,7 +38,7 @@ async function renderDynamic(req, res){
 
 }
 
-module.exports = {
+export default {
     home,
     renderDynamic
 };

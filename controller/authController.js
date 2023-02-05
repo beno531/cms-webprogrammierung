@@ -1,8 +1,7 @@
-import { LoginUser } from "../models/loginUser";
-import User from '../models/user'; 
-import SecurityMaster from '../models/securityMaster';
-
-const jwt = require('jsonwebtoken');
+import { LoginUser } from "../models/loginUser.js";
+import User from '../models/user.js'; 
+import SecurityMaster from '../models/securityMaster.js';
+import jwt from "jsonwebtoken";
 
 
 // Check Credentials -> return token
@@ -17,14 +16,10 @@ async function login(req, res){
 
         var result = await User.findOne({ benutzername: loginUser.username }).exec();
 
-        console.log(result);
-
         var check = await SecurityMaster.checkPassword(loginUser.password, result.passwort);
 
         if (check) {
             const jwtSecret = process.env.JWT_SECRET;
-
-            console.log(jwtSecret);
 
             // Generate an access token
             const accessToken = jwt.sign({ username: result.benutzername, role: result.rolle, overwrite: true }, jwtSecret);
@@ -37,7 +32,7 @@ async function login(req, res){
 
 
     }
-    catch (error: any) {
+    catch (error) {
         res.status(400).json({ message: error.message })
     }
     
@@ -52,8 +47,7 @@ async function logout(req, res){
 }
 
 
-
-module.exports = {
+export default {
     login,
     logout
 };

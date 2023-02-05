@@ -1,15 +1,12 @@
-import * as express from "express";
-import SecurityMaster from "../models/securityMaster";
-
+import express from "express";
 const router = express.Router();
 
-const UserController = require('../controller/userController');
-const MediaController = require('../controller/mediaController');
-const SiteController = require('../controller/siteController');
-const AuthController = require('../controller/authController');
-const SettingsController = require('../controller/settingsController');
-
-module.exports = router;
+import SecurityMaster from "../models/securityMaster.js";
+import UserController from "../controller/userController.js";
+import MediaController from "../controller/mediaController.js";
+import SiteController from "../controller/siteController.js";
+import AuthController from "../controller/authController.js";
+import SettingsController from "../controller/settingsController.js";
 
 
 /*********************************
@@ -47,11 +44,11 @@ router.delete('/media/delete/:id', SecurityMaster.authenticateToken, MediaContro
 ************** SITE **************
 **********************************/
 
-// Create Site
-router.post('/site/create', SecurityMaster.authenticateToken, SiteController.createSite);
-
 // GetAll Sites
 router.get('/site', SecurityMaster.authenticateToken, SiteController.getAllSites);
+
+// Create Site
+router.post('/site/create', SecurityMaster.authenticateToken, SiteController.createSite);
 
 // Seite editieren
 router.put('/site/:id/edit', SecurityMaster.authenticateToken, SiteController.editSite);
@@ -80,3 +77,6 @@ router.post('/settings/css', SecurityMaster.authenticateToken, SettingsControlle
 
 // Get initial CSS
 router.get('/settings/css/initial', SecurityMaster.authenticateToken, SettingsController.getInitialCss);
+
+
+export default router;

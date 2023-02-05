@@ -1,10 +1,13 @@
-import Media from "../models/media";
-import Site from "../models/site";
+import Media from "../models/media.js";
+import Site from "../models/site.js";
 
+import fs from 'fs';
 
-const SettingsController = require('../controller/settingsController');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-var fs = require('fs');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 // Get Login
@@ -71,7 +74,7 @@ async function getEinstellungen(req, res) {
 
 }
 
-module.exports = {
+export default {
     getLogin,
     getDahsboard,
     getMedienverwaltung,

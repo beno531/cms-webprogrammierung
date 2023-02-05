@@ -1,5 +1,11 @@
-import Site from  '../models/site';
-var fs = require('fs');
+import Site from  '../models/site.js';
+import fs from 'fs';
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 async function getAllSites(req, res) {
@@ -9,7 +15,7 @@ async function getAllSites(req, res) {
         
         res.json(data);
     }
-    catch (error: any) {
+    catch (error) {
         res.status(500).json({ message: error.message })
     }
 
@@ -48,7 +54,7 @@ async function createSite(req, res) {
             const dataToSave = await data.save();
             response = dataToSave;
         }
-        catch (error: any) {
+        catch (error) {
             return res.status(400).json(error.message);
         }
 
@@ -72,7 +78,7 @@ async function createSite(req, res) {
                 console.log('File is created successfully.');
             });
             
-        } catch (error: any) {
+        } catch (error) {
             return res.status(400).json(error.message);
         }
 
@@ -98,7 +104,7 @@ async function createSite(req, res) {
             const dataToSave = await data.save();
             response = dataToSave;
         }
-        catch (error: any) {
+        catch (error) {
             res.status(400).json(error.message);
         }
 
@@ -119,7 +125,7 @@ async function createSite(req, res) {
                 console.log('File is created successfully.');
             });
             
-        } catch (error: any) {
+        } catch (error) {
             res.status(400).json(error.message);
         }
     }
@@ -146,7 +152,7 @@ async function editSite(req, res){
 
         res.status(200).json(`Die Änderungen wurden erfolgreich gespeichert!`);
     }
-    catch (error: any) {
+    catch (error) {
         res.status(400).json(error.message);
     }
 }
@@ -156,27 +162,33 @@ async function editSite(req, res){
 async function deleteSite(req, res){
     try {
         const id = req.params.id;
-        Site.findByIdAndDelete(id, function (err: any, data: any) {
+        Site.findByIdAndDelete(id, function (err, data) {
             if(err){
                 res.status(400).json({ message: err.message })
             }
 
 
-            let filePath = __dirname + "/../views/public/" + data.titel + '.ejs'
-            fs.unlinkSync(filePath);
+            try {
+
+                let filePath = __dirname + "/../views/public/" + data.titel + '.ejs'
+                fs.unlinkSync(filePath);
+                
+            } catch (error) {
+                console.log("Element ist nicht mehr vorhanden!");
+            }
 
             res.status(200).json(`Seite "${data?.titel}" wurde gelöscht.`);
         });
         
     }
-    catch (error: any) {
+    catch (error) {
         res.status(400).json({ message: error.message })
     }
 
     // TODO -> Delete File in Public/Views
 }
 
-module.exports = {
+export default {
     createSite,
     getAllSites,
     editSite,

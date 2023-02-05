@@ -1,13 +1,9 @@
-import * as express from "express";
-import { send } from "process";
-import SecurityMaster from "../models/securityMaster";
+import express from "express";
+import SecurityMaster from "../models/securityMaster.js";
 
-const path = require('path');
 const router = express.Router();
 
-const PrivateViewController = require('../controller/privateViewController');
-
-module.exports = router;
+import PrivateViewController from "../controller/privateViewController.js";
 
 
 /*********************************
@@ -34,3 +30,5 @@ router.get('/seiteneditor/:id', SecurityMaster.authenticateToken, PrivateViewCon
 
 // Einstellungen
 router.get('/einstellungen', SecurityMaster.authenticateToken, PrivateViewController.getEinstellungen);
+
+export default router;

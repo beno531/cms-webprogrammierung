@@ -1,7 +1,14 @@
-import Media from  '../models/media'; 
+import Media from  '../models/media.js'; 
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const UPLOADPATH = __dirname + '/../media/';
-var fs = require('fs');
-const testFolder = './media/';
 
 
 // Get all Media
@@ -10,7 +17,7 @@ async function getAllMedia(req, res){
         const data = await Media.find();
         res.json(data)
     }
-    catch (error: any) {
+    catch (error) {
         res.status(500).json({ message: error.message })
     }
 }
@@ -37,7 +44,7 @@ async function createMedia(req, res) {
     }
 
     // Use the mv() method to place the file somewhere on your server
-    sampleFile.mv(uploadPath, async function (err: any) {
+    sampleFile.mv(uploadPath, async function (err) {
         if (err) {
             return res.status(500).json(err);
         }
@@ -53,7 +60,7 @@ async function createMedia(req, res) {
             const dataToSave = await data.save();
             return res.status(200).json(dataToSave);
         }
-        catch (error: any) {
+        catch (error) {
             return res.status(400).json(error.message);
         }
     });
@@ -63,20 +70,24 @@ async function createMedia(req, res) {
 async function deleteMedia(req, res){
     try {
         const id = req.params.id;
-        Media.findByIdAndDelete(id, function (err: any, docs: any) {
+        Media.findByIdAndDelete(id, function (err, docs) {
 
-            let filePath = UPLOADPATH + docs.bezeichnung
-            fs.unlinkSync(filePath);
+            try {
+                let filePath = UPLOADPATH + docs.bezeichnung
+                fs.unlinkSync(filePath);
+            } catch (error) {
+                console.log("Element ist nicht vorhanden!");
+            }
         });
 
         res.status(200).json("Das Element wurde erfolgreich gelöscht!");
     }
-    catch (error: any) {
+    catch (error) {
         res.status(400).json({ message: error.message });
     }
 }
 
-module.exports = {
+export default {
     getAllMedia,
     createMedia,
     deleteMedia

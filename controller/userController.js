@@ -1,5 +1,5 @@
-import User from '../models/user';
-import SecurityMaster from '../models/securityMaster';
+import User from '../models/user.js';
+import SecurityMaster from '../models/securityMaster.js';
 
 
 // Get all User
@@ -10,7 +10,7 @@ async function getAllUser(req, res) {
 
         res.json(data);
     }
-    catch (error: any) {
+    catch (error) {
         res.status(500).json({ message: error.message })
     }
 
@@ -37,7 +37,7 @@ async function createUser(req, res) {
 
             res.status(200).json("Der User " + dataToSave.benutzername + " wurde erfolgreich angelegt!");
         }
-        catch (error: any) {
+        catch (error) {
             res.status(400).json(error.message);
         }
 
@@ -83,7 +83,7 @@ async function updateUser(req, res) {
             }
 
         }
-        catch (error: any) {
+        catch (error) {
             res.status(400).json(error.message);
         }
 
@@ -109,7 +109,7 @@ async function deleteUser(req, res) {
             }
 
         }
-        catch (error: any) {
+        catch (error) {
             res.status(400).json({ message: error.message });
         }
 
@@ -118,7 +118,7 @@ async function deleteUser(req, res) {
     }
 }
 
-module.exports = {
+export default {
     getAllUser,
     createUser,
     updateUser,

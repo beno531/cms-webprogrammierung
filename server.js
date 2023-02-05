@@ -1,22 +1,28 @@
-import { DataSeeder } from "./dataseeder/seed";
-import User from "./models/user";
+"use strict";
 
-require('dotenv').config();
+import DataSeeder from "./data/seed.js";
+import User from "./models/user.js";
 
-const cors = require('cors');
-const express = require('express');
-const mongoose = require('mongoose');
+import dotenv from "dotenv";
+dotenv.config();
+
+import cors from "cors";
+import express from "express";
+import mongoose from "mongoose";
 const mongoString = process.env.DATABASE_URL;
-const apiRoutes = require('./routes/apiRoutes');
-const privateRoutes = require('./routes/privateRoutes');
-const publicRoutes = require('./routes/publicRoutes');
-const bodyParser = require('body-parser');
-const fileUpload = require('express-fileupload');
-const morgan = require('morgan');
-const path = require('path');
-const favicon = require('serve-favicon');
+import apiRoutes from "./routes/apiRoutes.js";
+import privateRoutes from "./routes/privateRoutes.js";
+import publicRoutes from "./routes/publicRoutes.js";
+import bodyParser from 'body-parser';
+import fileUpload from 'express-fileupload';
+import morgan from 'morgan';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import favicon from 'serve-favicon';
 
 const PORT = process.env.PORT || 8080;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 mongoose.connect(mongoString, async function (err) {

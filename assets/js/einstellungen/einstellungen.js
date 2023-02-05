@@ -6,7 +6,12 @@ window.onload = function () {
 
 async function formSaveCss() {
 
+
+    console.log("asd");
+
     var response = await saveCss(editCssForm);
+
+    console.log(response);
 
     if (response.status == 200) {
         alert("Das Speichern war erfolgreich!");

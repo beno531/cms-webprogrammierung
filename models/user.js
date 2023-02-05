@@ -1,6 +1,8 @@
+"use strict";
+
 import * as mongoose from "mongoose";
 
-export const dataSchema = new mongoose.Schema({
+const dataSchema = new mongoose.Schema({
     name: {
         required: true,
         type: String

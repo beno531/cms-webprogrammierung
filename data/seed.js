@@ -1,9 +1,9 @@
-import SecurityMaster from "../models/securityMaster";
-import User from "../models/user";
+import SecurityMaster from "../models/securityMaster.js";
+import User from "../models/user.js";
 
-export class DataSeeder {
+class DataSeeder {
 
-    public static async seed() {
+    static async seed() {
         
         const seedUser = [
             {

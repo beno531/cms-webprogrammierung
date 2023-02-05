@@ -1,11 +1,13 @@
-import User from "./user";
+"use strict";
 
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import User from "./user.js";
 
-export class SecurityMaster {
+import * as bcrypt from "bcrypt";
+import * as jwt from "jsonwebtoken";
 
-  public static async hashPassword(password: string) {
+class SecurityMaster {
+
+  static async hashPassword(password) {
 
     const salt = await bcrypt.genSalt(10);
 
@@ -15,11 +17,11 @@ export class SecurityMaster {
 
   }
 
-  public static async checkPassword(password: string, dbPassword: string) {
+  static async checkPassword(password, dbPassword) {
     return await bcrypt.compareSync(password, dbPassword);
   }
 
-  public static async updateToken(username) {
+  static async updateToken(username) {
 
     try {
       var result = await User.findOne({ benutzername: username }).exec();
@@ -30,13 +32,13 @@ export class SecurityMaster {
       return jwt.sign({ username: result.benutzername, role: result.rolle, overwrite: true }, jwtSecret);
 
     }
-    catch (error: any) {
+    catch (error) {
       console.log(error);
     }
 
   }
 
-  public static authenticateToken(req, res, next) {
+  static authenticateToken(req, res, next) {
 
     let cookies = {};
 
@@ -57,7 +59,7 @@ export class SecurityMaster {
 
     if (token == null) return res.sendStatus(401)
 
-    jwt.verify(token, process.env.JWT_SECRET as string, (err: any, user: any) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
 
       if (err) return res.sendStatus(403)
 
