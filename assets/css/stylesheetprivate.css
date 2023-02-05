@@ -11,6 +11,22 @@ body {
   margin: 0;/* reset */
   font-family: sans-serif;
 }
+
+@media only screen and (max-width: 2000px) {
+  body {
+    width: 100%;
+    
+  }
+}
+
+@media only screen and (min-width: 2000px) {
+  body {
+    width: 2000px;
+    margin: auto;
+    }
+}
+
+
 section {
           flex: 1;/* fill up whole space avalaible */
   display: flex;/* inbrication for side by side same height children */
@@ -418,4 +434,126 @@ textarea:focus-visible{
 
 #metadaten li span{
   width: 50%;
+}
+
+
+.seiteneditor{
+  height: 100vh;
+  background-color: rgb(235, 235, 235);
+  overflow: hidden;
+}
+
+.seiteneditor-header{
+  padding: 15px 30px;
+  color: black;
+  font-weight: 600;
+  font-size: 1.8em;
+  height: 30px;
+}
+
+#editSiteForm{
+  height: 100%;
+}
+
+.seiteneditor-medienauswahl{
+  display: flex;
+            justify-content: space-between;
+            align-items: center;
+}
+
+.seiteneditor-medienauswahl-tbody{
+  overflow-y: scroll;
+}
+
+#editSiteForm textarea{
+  height: 100%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: none;            
+}
+
+#editSiteForm div{
+  height: 60px;           
+}
+
+.box {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 60px 30px 30px 30px; 
+  height: 100%; 
+}
+
+.one {
+  flex: 4 1 35em;
+  height: 100%;
+  display: block;
+  height: 100%;
+}
+
+.two {
+  display: flex;
+  flex: 1 1 25em;
+  flex-flow: column;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  overflow-y: hidden;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  height: 100%;
+}
+
+#editSiteForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#editorMedienverwaltung{
+  box-shadow: none !important;
+  margin: 0px !important;
+}
+
+.media-table-layout{
+  display: block;
+  height: 100%;
+  width: 100%;
+  margin-top: 20px;
+  overflow-y: scroll;
+}
+
+.einstellungen{
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+}
+
+#editCssForm{
+  height: 100%;
+  display: flex; 
+  flex-flow: column;
+  align-items: flex-end;
+}
+
+#editCssForm textarea{
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: none;
+  resize: none;
+}
+
+#editCssForm div{
+  height: 60px;
 }

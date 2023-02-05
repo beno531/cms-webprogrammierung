@@ -1,6 +1,6 @@
 "use strict";
 
-// Subscribe to Edit-User-Form
+// Anfrage um die den Inhalt einer Seite zu aktualisieren
 async function formEditSite() {
 
   const siteId = document.querySelector('#editSiteForm #siteId').value;
@@ -20,7 +20,7 @@ async function formEditSite() {
   }
 };
 
-// Create new Media
+// Anfrage um eine neue Seite zu erstellen
 async function formUploadMedia() {
 
   var response = await createMedia(uploadMediaForm);
@@ -40,7 +40,7 @@ async function formUploadMedia() {
   }
 };
 
-
+// Fügt ein weiteres Element der Seiten-Tabelle hinzu
 function appendItemToTable(item) {
 
   const mediaTable = document.querySelector("#editorMedienverwaltung");
@@ -60,7 +60,7 @@ function appendItemToTable(item) {
   mediaTable.appendChild(data);
 }
 
-
+// Kopiert einen Link in die Zwischenablage des Computers
 function copyLinkToClipboard(link) {
 
   navigator.clipboard.writeText(link);
@@ -69,6 +69,7 @@ function copyLinkToClipboard(link) {
 
 }
 
+// Bricht das editieren eines Seite ab
 function cancelEdit() {
 
   const check = window.confirm(`Möchten Sie die Seite verlassen ohne zu speichern?`);

@@ -1,13 +1,14 @@
 "use strict";
 
-// Get all Sites from API
+
 window.onload = function(){ 
   buildTable();
+  //Lädt den Username
   displayUsername();
 };
 
 
-// Subscribe to Create-User-Form
+// Anfrage um eine neue Seite zu erstellen
 async function formCreateSite() {
 
   var response = await createSite(createSiteForm);
@@ -22,12 +23,13 @@ async function formCreateSite() {
     location.href = '/cms/seiteneditor/' + result._id;
 
   }else{
+    createSiteForm.reset();
     alert(result);
   }
 };
 
 
-//
+// Holt alle Seiten vom Server und baut eine entsprechende Tabelle zum anzeigen der Daten
 async function buildTable(){
 
 

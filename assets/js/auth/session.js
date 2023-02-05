@@ -1,5 +1,6 @@
 "use strict";
 
+// Liest den aktuellen Username aus dem JWT Token und zeigt ihn in der Header Bar an
 function displayUsername() {
 
     const data = getCookie("auth");
@@ -13,6 +14,7 @@ function displayUsername() {
     return user.username;
 }
 
+// Entschlüsselt die Payload des JWT Tokens
 function parseJwt(token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -23,6 +25,7 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload);
 }
 
+// Liest die Cookies aus dem Cookie Storage aus
 function getCookie(cookieName) {
     let cookie = {};
     document.cookie.split(';').forEach(function (el) {

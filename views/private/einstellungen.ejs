@@ -36,20 +36,15 @@
 
             <main>
 
-                <div style="display: flex;flex-flow: column;height: 100%;width: 100%;">
+                <div class="einstellungen">
 
                     <h1>CSS:</h1>
 
-                    <form id="editCssForm" name="editCssForm"
-                        style="height: 100%;display: flex; flex-flow: column;align-items: flex-end;">
-                        <textarea style="height: 100%;width: 100%;
-                            padding: 20px;
-                                        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-                                        border: none;
-                                        resize: none;" id="css" name="css"
+                    <form id="editCssForm" name="editCssForm">
+                        <textarea id="css" name="css"
                             placeholder="Hier CSS einfügen"><% if(cssData){ %><%= cssData %><% } %></textarea>
                         <script> var cssData = '<%-cssData%>'</script>
-                        <div style="height: 60px;">
+                        <div>
                             <button type="button" class="editor-btn" onclick="formSaveCss()">Speichern</button>
                             <button type="button" class="editor-btn" onclick="formGetInitialCss()">Zurücksetzen</button>
                         </div>

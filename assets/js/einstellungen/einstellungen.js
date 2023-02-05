@@ -1,13 +1,12 @@
 "use strict";
 
 window.onload = function () {
+    //Lädt den Username
     displayUsername();
 };
 
+// Anfrage zum überschreiben der PublicCss Datei
 async function formSaveCss() {
-
-
-    console.log("asd");
 
     var response = await saveCss(editCssForm);
 
@@ -21,6 +20,7 @@ async function formSaveCss() {
 
 }
 
+// Anfrage zum holen der initialen Public Css Datei
 async function formGetInitialCss() {
 
     var response = await getInitialCss();

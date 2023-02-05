@@ -32,7 +32,7 @@ class MediaController {
 
         // Prüft ob wirklich eine Datei hochgeladen wurde und ob sie ungleich der Länge 0 entspricht
         if (!req.files || Object.keys(req.files).length === 0) {
-            return res.status(400).json('Es wurde keine Dtaei hochgeladen');
+            return res.status(400).json('Es wurde keine Datei hochgeladen');
         }
 
         // Selekiert die eigentlich Datei aus der Anfrage

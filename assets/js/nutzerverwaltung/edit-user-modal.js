@@ -31,7 +31,7 @@ document.querySelector("body").appendChild(editUserModal);
 const modalUserEdit = document.querySelector("#modal-user-edit");
 const closeButtonUserEdit = document.querySelector("#modal-user-edit-close-button");
 
-
+// Öffnet oder schließt den modalen Dialog
 function toggleEditUserModal() {
     
     modalUserEdit.classList.toggle("show-modal");
@@ -43,6 +43,7 @@ function toggleEditUserModal() {
 
 }
 
+// Lädt die entsprechenden Userdaten in den modalen Dialog
 function loadUserDataModal(user) {
 
     document.querySelector('#modal-user-edit #benutzername').value = user.benutzername;

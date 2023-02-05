@@ -1,12 +1,12 @@
 "use strict";
 
-// Get all Users from API
+// Holt alle User Daten vom Server
 window.onload = function(){ 
   buildTable();
   displayUsername();
 };
 
-// Subscribe to Create-User-Form
+// Anfrage die ein neuen User erstellt
 async function formCreateUser() {
 
   var response = await createUser(createUserForm);
@@ -23,7 +23,7 @@ async function formCreateUser() {
   }
 };
 
-// Subscribe to Edit-User-Form
+// Anfrage die einen bestimmten User aktualisiert
 async function formEditUser() {
 
   const username = document.querySelector('#modal-user-edit #benutzername').value;
@@ -44,7 +44,7 @@ async function formEditUser() {
 };
 
 
-// 
+// Holt alle User vom Server und baut die entsprechende Tabelle zum anziegen der Daten
 async function buildTable(){
 
   var response = await getAllUser();

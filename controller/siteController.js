@@ -92,7 +92,7 @@ class SiteController {
 
             //Wie viele Unterseiten gibt es (wenn layout nicht hauptseite) -> max. 5 Unterseiten
             var query = Site.find({ layout: 'Unterseite' });
-            if (await query.count() >= 1) {
+            if (await query.count() >= 5) {
                 return res.status(400).json("Es können nur maximal 5 Unterseiten angelegt werden!");
             }
             

@@ -37,6 +37,7 @@ const modalUserCreate = document.querySelector("#modal-user-create");
 const triggerUserCreate = document.querySelector("#modal-user-create-trigger");
 const closeButtonUserCreate = document.querySelector("#modal-user-create-close-button");
 
+// Öffnet oder schließt den modalen Dialog
 function toggleUserCreateModal() {
 
     console.log(modalUserCreate);

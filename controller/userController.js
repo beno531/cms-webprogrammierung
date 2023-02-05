@@ -23,6 +23,7 @@ class UserController {
     // Create User
     static async createUser(req, res) {
 
+        // Einschränkung: Nur als Admin ausführbar
         if (req.user.role == "admin") {
 
             const data = new User({
@@ -35,8 +36,11 @@ class UserController {
             });
 
             try {
+
+                // Passwort wird verschlüsselt
                 data.passwort = await SecurityMaster.hashPassword(data.passwort);
 
+                // Neuer User wird in der DB angelegt
                 const dataToSave = await data.save();
 
                 res.status(200).json("Der User " + dataToSave.benutzername + " wurde erfolgreich angelegt!");
@@ -53,6 +57,7 @@ class UserController {
     // Update User
     static async updateUser(req, res) {
 
+        // Einschränkung: Nur als Admin ausführbar
         if (req.user.role == "admin") {
 
             try {
@@ -65,6 +70,7 @@ class UserController {
                 };
 
 
+                // Checkt ob der User seine eigene Rolle ändert
                 if (username == req.user.username && updatedData.rolle != req.user.role) {
 
                     res.status(400).json("Sie können Ihre eigene Rolle nicht ändern!");
@@ -72,16 +78,10 @@ class UserController {
                 } else {
                     const options = { new: true };
 
+                    // Aktualisiert die entsprechenden Einträge des Users in der DB
                     const result = await User.findOneAndUpdate(
                         { benutzername: username }, updatedData, options
                     )
-
-                    // TODO
-                    if (username == req.user.role) {
-                        const accessToken = await SecurityMaster.updateToken(username);
-                        res.clearCookie('auth');
-                        res.cookie('auth', accessToken);
-                    }
 
                     res.status(200).json(`Die Änderungen wurden erfolgreich gespeichert!`);
                 }
@@ -99,12 +99,16 @@ class UserController {
     // Delete User
     static async deleteUser(req, res) {
 
+        // Einschränkung: Nur als Admin ausführbar
         if (req.user.role == "admin") {
             try {
 
                 const username = req.params.username;
 
+                // Checkt ob der User sich selber löscht
                 if (req.user.username != username) {
+
+                    // Ermittelt den User anhand seiner übermittelten ID und löscht diesen in der DB
                     const data = await User.findOneAndDelete({ benutzername: username }).exec();
                     res.status(200).json(`User "${data?.benutzername}" wurde gelöscht.`);
                 }

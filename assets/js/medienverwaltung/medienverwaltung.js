@@ -1,10 +1,13 @@
 "use strict";
 
 window.onload = function(){ 
+    // Holt die Medien vom Server und baut die entsprechende Tabelle auf
     buildTable();
+    // Lädt den Username
     displayUsername();
 };
 
+// Anfrage zum erstellen einer neuen Media Datei auf dem Server
 async function formUploadMedia(){
 
   var response = await createMedia(uploadMediaForm);
@@ -13,7 +16,9 @@ async function formUploadMedia(){
   
 
   if(response.status == 200){
+    // Setzt die Form zurück
     uploadMediaForm.reset();
+    // Schließt den modalen Dialog
     toggleUploadMediaModal();
     buildTable();
     alert("Der Upload von " + result.bezeichnung + " war erfolgreich!");
@@ -23,6 +28,7 @@ async function formUploadMedia(){
   }
 };
 
+// Fügt der Tabelle ein weiteres Media Element hinzu
 function appendItemToTable(item) {
   
   const mediaTable = document.querySelector("#medienverwaltung");
@@ -43,7 +49,7 @@ function appendItemToTable(item) {
 
 }
 
-
+// Holt die Media Daten vom Server und baut die entsprechende Tabelle
 async function buildTable() {
 
   var response = await getAllMedia();

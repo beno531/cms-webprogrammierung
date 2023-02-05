@@ -33,6 +33,7 @@ const modalSiteCreate = document.querySelector("#modal-site-create");
 const triggerSiteCreate = document.querySelector("#modal-site-create-trigger");
 const closeButtonSiteCreate = document.querySelector("#modal-site-create-close-button");
 
+// Öffnet oder schließt den modalen Dialog
 function toggleSiteCreateModal() {
 
     modalSiteCreate.classList.toggle("show-modal");
