@@ -92,13 +92,10 @@ class SiteController {
 
             //Wie viele Unterseiten gibt es (wenn layout nicht hauptseite) -> max. 5 Unterseiten
             var query = Site.find({ layout: 'Unterseite' });
-            query.count(function (err, count) {
-                if (err) console.log(err)
-
-                if (count >= 5) {
-                    return res.status(400).json("Es können nur maximal 5 Unterseiten angelegt werden!");
-                }
-            })
+            if (await query.count() >= 1) {
+                return res.status(400).json("Es können nur maximal 5 Unterseiten angelegt werden!");
+            }
+            
 
             // Seite in der DB erstellen
             var response;
@@ -141,16 +138,13 @@ class SiteController {
     static async editSite(req, res) {
         try {
             const siteId = req.params.id;
-
-
             const updatedData = {
                 inhalt: req.body.inhalt,
             };
 
-            const options = { new: true };
-
-            const result = await Site.findOneAndUpdate(
-                { _id: siteId }, updatedData, options
+            // Sucht Seite über Id in der DB -> entsprechnder Eintrag wird mit neuen Daten aktualisiert
+            await Site.findOneAndUpdate(
+                { _id: siteId }, updatedData, { new: true }
             )
 
             res.status(200).json(`Die Änderungen wurden erfolgreich gespeichert!`);
@@ -165,14 +159,15 @@ class SiteController {
     static async deleteSite(req, res) {
         try {
             const id = req.params.id;
+
+            // Ermittelt Seite anhand der ID in der Datenbank und löscht diese
             Site.findByIdAndDelete(id, function (err, data) {
                 if (err) {
                     res.status(400).json({ message: err.message })
                 }
 
-
                 try {
-
+                    // Löscht die Seite physisch im Dateisystem
                     let filePath = __dirname + "/../views/public/" + data.titel + '.ejs'
                     fs.unlinkSync(filePath);
 
@@ -187,8 +182,6 @@ class SiteController {
         catch (error) {
             res.status(400).json({ message: error.message })
         }
-
-        // TODO -> Delete File in Public/Views
     }
 
 }
