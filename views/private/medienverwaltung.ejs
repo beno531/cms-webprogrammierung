@@ -8,14 +8,11 @@
     <link rel="stylesheet" href="/css/stylesheetprivate.css">
     <title>Medienverwaltung</title>
 
-    <link rel="icon" type="image/x-icon" href="/img/logo.png">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/all.min.css"/>
 
         <script src="/js/fetchApi.js"></script>
         <script type="text/javascript" src="/js/auth/logout.js"></script>
+        <script type="text/javascript" src="/js/auth/session.js"></script>
 </head>
 
 <body>
@@ -24,22 +21,18 @@
 
         <ul class="dashboardnav">
             <a href="/cms/dashboard">DASHBOARD</a>
-            <button class="logout-btn" onclick="logoutUser()">Abmelden</button>
+            <div class="nav-info">
+                <p id="username"></p>
+                <button class="logout-btn" onclick="logoutUser()">Abmelden</button>
+            </div>
         </ul>
 
     </header>
 
 
     <section>
-        <aside>
-
-            <ul class="sidenav-menu">
-                <li><a href="/cms/seitenverwaltung"><i class="fa-solid fa-file-lines fa-lg"></i>Seitenverwaltung</a></li>
-                <li><a href="/cms/nutzerverwaltung"><i class="fa-solid fa-user fa-lg"></i>Nutzerverwaltung</a></li>
-                <li><a href="/cms/medienverwaltung"><i class="fa-solid fa-image fa-lg"></i>Medienverwaltung</a></li>
-            </ul>
-
-        </aside>
+        
+        <%- include('partials/_sideNav') %>
 
         <main>
 
@@ -64,12 +57,8 @@
 
     </section>
 
-    
-
-
     <script src="/js/medienverwaltung/upload-media-modal.js"></script>
     <script src="/js/medienverwaltung/medienverwaltung.js"></script>
-    <script src="/js/medienverwaltung/view-media-modal.js"></script>
 </body>
 
 </html>

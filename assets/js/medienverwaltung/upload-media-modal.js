@@ -1,11 +1,13 @@
+"use strict";
+
 const mediaModalContent = `
 <div class="modal-content">
     <span class="close-button" id="modal-upload-media-close-button">&times;</span>
     <h1>Medienupload:</h1>
     <form ref='uploadMediaForm' 
     name='uploadMediaForm'>
-        <input type="file" name="sampleFile" />
-        <input type='submit' value='Upload' />
+        <input id="fileInput" type="file" name="sampleFile" />
+        <button type="button" class="modal-btn" onclick="formUploadMedia()">Upload</button>
     </form>
 </div>`;
 

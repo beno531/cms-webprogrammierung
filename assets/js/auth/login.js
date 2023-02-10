@@ -1,17 +1,22 @@
-//#region Login
+"use strict";
 
-loginForm.onsubmit = async (e) => {
-    e.preventDefault();
-  
+// login 
+async function formLogin() {
+
+  // Checkt ob Cookies im Browser erlaubt sind
+  if (!navigator.cookieEnabled) {
+    alert("Sie haben Cookies in Ihrem Browser deaktiviert! Um sich anmelden zu können, müssen Cookies aktiviert sein.")
+  } else {
+     //schickt die Login Daten an den Server
     var response = await login(loginForm);
-  
-    if(response.status == 200){
 
-        location.href = '/cms/dashboard';
+    if (response.status == 200) {
 
-    }else{
+      // Weiterleitung auf die Dashboard Seite
+      location.href = '/cms/dashboard';
+
+    } else {
       alert("Login ist fehlgeschlagen!");
     }
-  };
-  
-//#endregion
+  }
+};

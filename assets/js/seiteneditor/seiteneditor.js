@@ -1,58 +1,52 @@
-//#region Subscribe to Create-User-Form
+"use strict";
 
-editSiteForm.onsubmit = async (e) => {
-    e.preventDefault();
+// Anfrage um die den Inhalt einer Seite zu aktualisieren
+async function formEditSite() {
 
-    const siteId = document.querySelector('#editSiteForm #siteId').value;
-  
-    var response = await editSite(siteId, editSiteForm);
-  
-    let result = await response.json();
-  
-    if(response.status == 200){
-  
-      editSiteForm.reset();
-  
-      location.href = '/cms/seitenverwaltung/';
-  
-    }else{
-      alert(result);
-    }
-  };
-  
-  //#endregion
+  const siteId = document.querySelector('#editSiteForm #siteId').value;
 
-  //#region Create new Media
+  var response = await editSite(siteId, editSiteForm);
 
-uploadMediaForm.onsubmit = async (e) => {
-    e.preventDefault();
+  let result = await response.json();
 
-    var response = await createMedia(uploadMediaForm);
+  if (response.status == 200) {
 
-    let result = await response.json();
+    editSiteForm.reset();
 
-    console.log(result);
+    location.href = '/cms/seitenverwaltung/';
 
-
-
-    if (response.status == 200) {
-        toggleUploadMediaModal();
-        appendItemToTable(result);
-        alert("Der Upload von " + result.bezeichnung + " war erfolgreich!");
-    } else {
-        alert(result);
-    }
+  } else {
+    alert(result);
+  }
 };
 
-//#endregion
+// Anfrage um eine neue Seite zu erstellen
+async function formUploadMedia() {
+
+  var response = await createMedia(uploadMediaForm);
+
+  let result = await response.json();
 
 
+
+  if (response.status == 200) {
+    uploadMediaForm.reset();
+    toggleUploadMediaModal();
+    appendItemToTable(result);
+    alert("Der Upload von " + result.bezeichnung + " war erfolgreich!");
+  } else {
+    uploadMediaForm.reset();
+    alert(result);
+  }
+};
+
+// Fügt ein weiteres Element der Seiten-Tabelle hinzu
 function appendItemToTable(item) {
 
-    const mediaTable = document.querySelector("#editorMedienverwaltung");
+  const mediaTable = document.querySelector("#editorMedienverwaltung");
 
-    var data = document.createElement("tr");
-    data.innerHTML = `
+  var data = document.createElement("tr");
+  data.innerHTML = `
     <td>${item.bezeichnung}</td>
     <td class="options">
       <button onclick="toggleViewMediaModal();loadViewMediaModal('${item.link}')">
@@ -63,19 +57,19 @@ function appendItemToTable(item) {
       </button>
     </td>`
 
-    mediaTable.appendChild(data);
-
+  mediaTable.appendChild(data);
 }
 
-
+// Kopiert einen Link in die Zwischenablage des Computers
 function copyLinkToClipboard(link) {
 
-    navigator.clipboard.writeText(link);
+  navigator.clipboard.writeText(link);
 
-    alert("Link wurde kopiert: " + link);
+  alert("Link wurde kopiert: " + link);
 
 }
 
+// Bricht das editieren eines Seite ab
 function cancelEdit() {
 
   const check = window.confirm(`Möchten Sie die Seite verlassen ohne zu speichern?`);
@@ -84,4 +78,3 @@ function cancelEdit() {
     location.href = '/cms/seitenverwaltung/';
   }
 }
-

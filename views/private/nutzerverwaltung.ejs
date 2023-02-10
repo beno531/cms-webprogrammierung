@@ -7,12 +7,10 @@
     <link rel="stylesheet" href="/css/stylesheetprivate.css">
     <title>Nutzerverwaltung</title>
 
-    <link rel="icon" type="image/x-icon" href="/img/logo.png">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="stylesheet" href="/css/all.min.css"/>
     <script type="text/javascript" src="/js/fetchApi.js"></script>
     <script type="text/javascript" src="/js/auth/logout.js"></script>
+    <script type="text/javascript" src="/js/auth/session.js"></script>
 </head>
 <body>
 
@@ -20,22 +18,18 @@
 
         <ul class="dashboardnav">
             <a href="/cms/dashboard">DASHBOARD</a>
-            <button class="logout-btn" onclick="logoutUser()">Abmelden</button>
+            <div class="nav-info">
+                <p id="username"></p>
+                <button class="logout-btn" onclick="logoutUser()">Abmelden</button>
+            </div>
         </ul>
 
     </header>
 
 
     <section>
-        <aside>
-
-            <ul class="sidenav-menu">
-                <li><a href="/cms/seitenverwaltung"><i class="fa-solid fa-file-lines fa-lg"></i>Seitenverwaltung</a></li>
-                <li><a href="/cms/nutzerverwaltung"><i class="fa-solid fa-user fa-lg"></i>Nutzerverwaltung</a></li>
-                <li><a href="/cms/medienverwaltung"><i class="fa-solid fa-image fa-lg"></i>Medienverwaltung</a></li>
-            </ul>
-
-        </aside>
+        
+        <%- include('partials/_sideNav') %>
 
         <main>
 
@@ -59,57 +53,6 @@
 
 
     </section>
-
-    <!-- Create User Modal -->
-    <div class="modal" id="modal-user-create">
-        <div class="modal-content">
-            <span class="close-button" id="modal-user-create-close-button">&times;</span>
-            <h1>Neuen User anlegen:</h1>
-            <form name="createUserForm">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name"><br>
-                <label for="vorname">Vorname:</label><br>
-                <input type="text" id="vorname" name="vorname"><br>
-                <label for="benutzername">Benutzername:</label><br>
-                <input type="text" id="benutzername" name="benutzername"><br>
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email"><br>
-                <label for="rolle">Rolle:</label><br>
-                <select name="rolle" id="rolle">
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                </select><br>
-                <label for="passwort">Passwort:</label><br>
-                <input type="password" id="passwort" name="passwort"><br>
-
-                <input type="submit" value="Erstellen">
-            </form>
-        </div>
-    </div>
-
-    <!-- Edit User Modal -->
-    <div class="modal" id="modal-user-edit">
-        <div class="modal-content">
-            <span class="close-button" id="modal-user-edit-close-button">&times;</span>
-            <h1>User editieren:</h1>
-            <form name="editUserForm">
-                <input type="hidden" id="benutzername" name="benutzername">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name"><br>
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email"><br>
-                <label for="rolle">Rolle:</label><br>
-                <select name="rolle" id="rolle">
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                </select><br>
-
-                <input type="submit" value="Speichern">
-            </form>
-        </div>
-    </div>
-
-
 
     <script type="text/javascript" src="/js/nutzerverwaltung/nutzerverwaltung.js" defer></script>
     <script type="text/javascript" src="/js/nutzerverwaltung/create-user-modal.js" defer></script>
